@@ -5,20 +5,10 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import jade.core.behaviours.CyclicBehaviour;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import processing.app.Preferences;
-
-
-import jade.core.behaviours.Behaviour;
-import jade.core.behaviours.CyclicBehaviour;
-import jade.domain.introspection.ACLMessage;
-
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 

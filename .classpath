@@ -6,10 +6,6 @@
 	<classpathentry kind="lib" path="lib/jackson-core-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jade.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sylvain/Desktop/arduino-1.0.5-windows/arduino-1.0.5/lib/core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sylvain/Desktop/arduino-1.0.5-windows/arduino-1.0.5/lib/ecj.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sylvain/Desktop/arduino-1.0.5-windows/arduino-1.0.5/lib/jna.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sylvain/Desktop/arduino-1.0.5-windows/arduino-1.0.5/lib/pde.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sylvain/Desktop/arduino-1.0.5-windows/arduino-1.0.5/lib/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
