@@ -1,10 +1,10 @@
 package LightSensorAgent;
 
 
-import gnu.io.CommPortIdentifier;
+/*import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
+import gnu.io.SerialPortEventListener;*/
 import jade.core.behaviours.CyclicBehaviour;
 
 import java.io.BufferedReader;
@@ -14,9 +14,9 @@ import java.util.Enumeration;
 
 
 // teste avec l'arduino marche niquel !!
-class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventListener {
+class LightSensorBehaviour extends CyclicBehaviour /*implements SerialPortEventListener */{
 	
-	SerialPort serialPort;
+	//SerialPort serialPort;
 	    /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
@@ -39,6 +39,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		
 	
 	LightSensorBehaviour(){
+		/*
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -78,7 +79,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
-		
+		*/
 	}
 
 	@Override
@@ -100,6 +101,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
+	/*
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
@@ -111,7 +113,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
-		
+		*/
 		
 	
 
