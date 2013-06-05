@@ -1,4 +1,4 @@
-package SmartHouse;
+package smarthouse;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -34,7 +34,7 @@ public class Main {
 		// Fire up the agent
 		lightAgent.start();
 		
-		// Pour la création du second agent sur un conteneur non principal
+		// Pour la crï¿½ation du second agent sur un conteneur non principal
 		// utiliser cette fonction sinon de/commenter
 		// en reseau exactemment la meme chose en remplacant l'IP
 		// par le localhost de la machine distante.
