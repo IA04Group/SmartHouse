@@ -1,4 +1,4 @@
-package smarthhouse.autoswitchagent;
+package smarthouse.autoswitchagent;
 
 import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
