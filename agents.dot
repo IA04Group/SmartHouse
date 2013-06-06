@@ -1,0 +1,55 @@
+digraph {
+    /* Physical process */
+    node [shape=box, style=filled, color=snow3];
+    user [label="utilisateur"];
+    coffee [label="machine à café"];
+    dbplanning [label="bdd emploi du temps"];
+    kinect [label="Kinect"];
+    arduino [label="Arduino émetteur radio"];
+    lightsensor [label="détecteur de lumière"];
+    window [label="fenêtre"];
+    shutter [label="volet"];
+    heater [label="chauffage"];
+    thermometer [label="thermomètre"];
+    player [label="lecteur multimédia"];
+
+    /* Agents */
+    node [shape=oval, style=""];
+    Aandroid [label="Agent Android"];
+    Aautoswitch [label="Agent autoswitch"];
+    Acoffee [label="Agent café"];
+    Aplanning [label="Agent emploi du temps"];
+    Akinect [label="Agent Kinect"];
+    Alight [label="Agent lumière"];
+    Alightsensor [label="Agent détecteur de lumière"];
+    Awindow [label="Agent fenêtre"];
+    Ashutter [label="Agent volet"];
+    Aheater [label="Agent chauffage"];
+    Atemperature [label="Agent thermomètre"];
+    Aplayer [label="Agent multimédia"];
+
+    /* Acquaintance agent <=> physical process */
+    edge [arrowhead=none, arrowtail=none];
+    Aandroid -> user;
+    Aautoswitch -> user;
+    Acoffee -> coffee;
+    Aplanning -> dbplanning;
+    Akinect -> kinect;
+    Alight -> arduino;
+    Alightsensor -> lightsensor;
+    Awindow -> window;
+    Ashutter -> shutter;
+    Aheater -> heater;
+    Atemperature -> thermometer;
+    Aplayer -> player;
+
+    /* Acquaintance agent <=> agent */
+    edge [arrowhead=normal, arrowtail=normal, dir=both];
+    Aandroid -> {Aautoswitch, Acoffee, Aplanning, Aplayer};
+    Aautoswitch -> {Akinect, Alightsensor, Alight, Aplanning};
+    Acoffee -> {Aplanning};
+    Aplanning -> {Ashutter, Aheater};
+    Awindow -> {Aheater};
+    Ashutter -> {Aheater};
+    Aheater -> {Atemperature};
+}
