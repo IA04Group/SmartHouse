@@ -30,10 +30,14 @@ public class Main {
 
 		// Create a new agent
 		// and pass it a reference to an Object
-		AgentController lightAgent = cc.createNewAgent("lightSensor","LightSensorAgent.LightSensorAgent", null);
+		AgentController lightAgent = cc.createNewAgent("lightSensor","smarthouse.lightsensoragent.LightSensorAgent", null);
 		// Fire up the agent
 		lightAgent.start();
 		
+		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		// Fire up the agent
+		simulation.start();
+
 		// Pour la cr�ation du second agent sur un conteneur non principal
 		// utiliser cette fonction sinon de/commenter
 		// en reseau exactemment la meme chose en remplacant l'IP

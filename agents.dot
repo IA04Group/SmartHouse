@@ -48,7 +48,7 @@ digraph {
     Aandroid -> {Aautoswitch, Acoffee, Aplanning, Aplayer};
     Aautoswitch -> {Akinect, Alightsensor, Alight, Aplanning};
     Acoffee -> {Aplanning};
-    Aplanning -> {Ashutter, Aheater};
+    Aplanning -> {Ashutter, Aheater, Atemperature};
     Awindow -> {Aheater};
     Ashutter -> {Aheater};
     Aheater -> {Atemperature};
