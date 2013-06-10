@@ -40,6 +40,11 @@ public class Main {
 		// Fire up the agent
 		lightAgentCuisine.start();
 		
+		// Create a new agent
+		// and pass it a reference to an Object
+		AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
+		// Fire up the agent
+		remoteControlAgent.start();
 		
 		
 		// AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
