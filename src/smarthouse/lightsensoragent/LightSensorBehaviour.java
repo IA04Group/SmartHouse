@@ -84,6 +84,7 @@ class LightSensorBehaviour extends CyclicBehaviour /*implements SerialPortEventL
 
 	@Override
 	public void action() {
+		/*
 		// TODO Auto-generated method stub
 		System.out.println(inputLine);
 		jade.lang.acl.ACLMessage msg=myAgent.receive();
@@ -92,6 +93,7 @@ class LightSensorBehaviour extends CyclicBehaviour /*implements SerialPortEventL
 		}else{
 			block();
 		}
+		*/
 	
 		
 	

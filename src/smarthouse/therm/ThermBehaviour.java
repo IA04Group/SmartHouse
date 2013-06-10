@@ -10,6 +10,9 @@ public class ThermBehaviour extends CyclicBehaviour{
 		// TODO Auto-generated method stub
 		//récupérer les demandes de température
 		//retourner la température régit par une loi suivant l'heure de la journée et la température du radiateur, l'état de la fenêtre (ouverte/fermée) etc.
+	
+	
+	
 	}
 
 	public class ThermBehaviourAskWindow extends OneShotBehaviour{

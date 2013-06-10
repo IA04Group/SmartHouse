@@ -30,13 +30,23 @@ public class Main {
 
 		// Create a new agent
 		// and pass it a reference to an Object
-		AgentController lightAgent = cc.createNewAgent("lightSensor","smarthouse.lightsensoragent.LightSensorAgent", null);
+		AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
 		// Fire up the agent
-		lightAgent.start();
+		lightSensorAgent.start();
 		
-		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		// Create a new agent
+		// and pass it a reference to an Object
+		AgentController lightAgentCuisine = cc.createNewAgent("lightAgentCuisine","smarthouse.LightAgent.LightAgent", null);
 		// Fire up the agent
-		simulation.start();
+		lightAgentCuisine.start();
+		
+		
+		
+		// AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		// Fire up the agent
+		// simulation.start();
+		
+		
 
 		// Pour la cr�ation du second agent sur un conteneur non principal
 		// utiliser cette fonction sinon de/commenter
