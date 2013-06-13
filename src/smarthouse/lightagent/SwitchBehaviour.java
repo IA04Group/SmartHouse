@@ -1,4 +1,4 @@
-package smarthouse.LightAgent;
+package smarthouse.lightagent;
 
 
 /*import gnu.io.CommPortIdentifier;

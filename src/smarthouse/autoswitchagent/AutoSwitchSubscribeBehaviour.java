@@ -1,5 +1,9 @@
 package smarthouse.autoswitchagent;
 
+import Data.Constants;
+import Data.MessageContent;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jade.core.behaviours.Behaviour;
@@ -8,7 +12,6 @@ import jade.lang.acl.MessageTemplate;
 
 @SuppressWarnings("serial")
 public class AutoSwitchSubscribeBehaviour extends Behaviour {
-	private static int MAX_LIGHTS = 2;
 	private int current_lights = 0;
 
 	@Override
@@ -18,12 +21,26 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 		
 		if (message != null) {
 			ACLMessage reponse = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
-			current_lights++;
+			current_lights = ((AutoSwitchAgent) myAgent).subscribeNewLight(message.getSender());
+			
+			//TODO décoder les infos (salle, etc)
+			
+			System.out.println("New light ! : " + message.getSender());
 		
 			ObjectMapper objectMapper = new ObjectMapper();
-			//TODO light classes..
+			MessageContent data = new MessageContent(current_lights, "", "");
+			String answer;
 			
-			// TODO réponse
+			try {
+				answer = objectMapper.writeValueAsString(data);
+			} catch (JsonProcessingException e) {
+				answer = "";
+				e.printStackTrace();
+			}
+			
+			reponse.setContent(answer);
+			reponse.addReceiver(message.getSender());
+			myAgent.send(reponse);
 		}
 		else{
 			block();
@@ -32,7 +49,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 
 	@Override
 	public boolean done() {
-		return MAX_LIGHTS < current_lights;
+		return Constants.NBR_MAX_LIGHTS < current_lights;
 	}
 
 }

@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-import smarthouse.LightAgent.LightAgent;
+import smarthouse.lightagent.LightAgent;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
