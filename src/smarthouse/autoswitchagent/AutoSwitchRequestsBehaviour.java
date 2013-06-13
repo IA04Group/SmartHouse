@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -63,6 +64,30 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
 		msg.setContent(answer);
 		msg.addReceiver(((AutoSwitchAgent)myAgent).lights.get(lightId));
+		myAgent.send(msg);
+	}
+	
+	/*
+	 * if the requested light does not exist or is already in the demanded state
+	 * 
+	 */
+	public void sendBadRequest(AID sender, String message) {
+		MessageContent d = new MessageContent(0, "autoswitch", message);
+		
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String answer;
+		
+		try {
+			answer = objectMapper.writeValueAsString(d);
+		} catch (JsonProcessingException e) {
+			answer = "";
+			e.printStackTrace();
+		}
+
+		ACLMessage msg = new ACLMessage(ACLMessage.FAILURE);
+		msg.setContent(answer);
+		msg.addReceiver(sender);
 		myAgent.send(msg);
 	}
 }
