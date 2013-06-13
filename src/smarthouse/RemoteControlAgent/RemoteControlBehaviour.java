@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 // teste avec l'arduino marche niquel !!
-class RemoteControlBehaviour extends CyclicBehaviour /*implements SerialPortEventListener */ implements SerialPortEventListener{
+class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventListener{
 	
 	SerialPort serialPort;
 	    /** The port we're normally going to use. */

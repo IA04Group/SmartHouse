@@ -29,7 +29,7 @@ public class LightAgent extends Agent {
 		//seqbhv.addSubBehaviour(new SwitchBehaviour());
 		
 		this.addBehaviour(seqbhv);
-		this.subscribeToSwitch();
+		//this.subscribeToSwitch();
 	}
 	
 	public void subscribeToSwitch() {

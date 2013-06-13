@@ -42,9 +42,9 @@ public class Main {
 		
 		// Create a new agent
 		// and pass it a reference to an Object
-		//AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
+		AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
 		// Fire up the agent
-		//remoteControlAgent.start();
+		remoteControlAgent.start();
 		
 		/*
 		 * NICO's stuff
@@ -55,12 +55,12 @@ public class Main {
 				"smarthouse.autoswitchagent.AutoSwitchAgent", null);
 		// Fire up the agent
 		autoSwitchAgent.start();
-		
+		*/
 		AgentController light1Agent = cc.createNewAgent("lightAgent1",
 				"smarthouse.lightagent.LightAgent", null);
 		// Fire up the agent
 		light1Agent.start();
-		
+		/*
 		AgentController light2Agent = cc.createNewAgent("lightAgent2",
 				"smarthouse.lightagent.LightAgent", null);
 		// Fire up the agent
@@ -72,9 +72,9 @@ public class Main {
 		light3Agent.start();
 		*/
 		
-		// AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		// Fire up the agent
-		// simulation.start();
+		simulation.start();
 		
 		
 
