@@ -30,9 +30,9 @@ public class Main {
 
 		// Create a new agent
 		// and pass it a reference to an Object
-		//AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
+		// AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
 		// Fire up the agent
-		//lightSensorAgent.start();
+		// lightSensorAgent.start();
 		
 		// Create a new agent
 		// and pass it a reference to an Object
