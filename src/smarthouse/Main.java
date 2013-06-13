@@ -49,13 +49,13 @@ public class Main {
 		/*
 		 * NICO's stuff
 		 * 
-		 * 
+		 */
 		// agents autoswitch and lights
 		AgentController autoSwitchAgent = cc.createNewAgent("autoSwitchAgent",
 				"smarthouse.autoswitchagent.AutoSwitchAgent", null);
 		// Fire up the agent
 		autoSwitchAgent.start();
-		
+				
 		AgentController light1Agent = cc.createNewAgent("lightAgent1",
 				"smarthouse.lightagent.LightAgent", null);
 		// Fire up the agent
@@ -70,7 +70,7 @@ public class Main {
 				"smarthouse.lightagent.LightAgent", null);
 		// Fire up the agent
 		light3Agent.start();
-		*/
+		
 		
 		// AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		// Fire up the agent

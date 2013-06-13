@@ -29,6 +29,8 @@ public class LightAgent extends Agent {
 		//seqbhv.addSubBehaviour(new SwitchBehaviour());
 		
 		this.addBehaviour(seqbhv);
+		
+		
 		this.subscribeToSwitch();
 	}
 	
@@ -44,14 +46,19 @@ public class LightAgent extends Agent {
 		DFAgentDescription[] result = null;
 		try {
 			result = DFService.search(this, template);
-			if(result != null && result[0] != null) 
+	        System.out.println(result.length + " results" );
+			if(result.length > 0) {
 				autoSwitch = result[0].getName();
+				message.addReceiver(autoSwitch);
+				send(message);
+			}
+			else {
+				System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
+				subscribeToSwitch();
+			}
 		} catch (FIPAException e) {
 			e.printStackTrace();
 		}
-
-		message.addReceiver(autoSwitch);
-		send(message);
 	
 	}
 
