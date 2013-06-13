@@ -20,7 +20,7 @@ public class LightSubscribeBehaviour extends Behaviour {
 	public void action() {
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);		
 		ACLMessage answer = myAgent.receive(template);
-			
+		
 		if (answer != null) {
 			ObjectMapper objectMapper = new ObjectMapper();
 			MessageContent d = null;
@@ -35,6 +35,8 @@ public class LightSubscribeBehaviour extends Behaviour {
 			}
 
 			System.out.println("I am registered : " + d.getValue());
+			((LightAgent)myAgent).setPosition((int) d.getValue());
+			
 			end = true;
 		}
 		else {

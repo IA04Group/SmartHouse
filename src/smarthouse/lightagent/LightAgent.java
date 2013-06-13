@@ -14,6 +14,7 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class LightAgent extends Agent {
 	
+	private int position = -1; // registered number in autoswitch
 	private boolean state = false; // false off, true on
 
 
@@ -44,20 +45,33 @@ public class LightAgent extends Agent {
 		DFAgentDescription[] result = null;
 		try {
 			result = DFService.search(this, template);
-			if(result != null && result[0] != null) 
+	        System.out.println(result.length + " results" );
+			if(result.length > 0) {
 				autoSwitch = result[0].getName();
+				message.addReceiver(autoSwitch);
+				send(message);
+			}
+			else {
+				System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
+				subscribeToSwitch();
+			}
 		} catch (FIPAException e) {
 			e.printStackTrace();
 		}
-
-		message.addReceiver(autoSwitch);
-		send(message);
 	
 	}
 
 	public void changeState() {
 		this.state = !this.state;
 		
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 	

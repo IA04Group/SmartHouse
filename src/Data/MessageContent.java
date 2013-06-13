@@ -28,6 +28,8 @@ public class MessageContent {
 	private String place;
 	private ArrayList<String> content = new ArrayList<String>();
 	
+	public MessageContent() {}
+
 	public MessageContent(double value, String type, String place, String... content){
 		
 		this.value = value;

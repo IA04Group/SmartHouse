@@ -49,17 +49,18 @@ public class Main {
 		/*
 		 * NICO's stuff
 		 * 
-		 * 
+		 */
 		// agents autoswitch and lights
 		AgentController autoSwitchAgent = cc.createNewAgent("autoSwitchAgent",
 				"smarthouse.autoswitchagent.AutoSwitchAgent", null);
 		// Fire up the agent
 		autoSwitchAgent.start();
-		*/
+
 		AgentController light1Agent = cc.createNewAgent("lightAgent1",
 				"smarthouse.lightagent.LightAgent", null);
 		// Fire up the agent
 		light1Agent.start();
+		
 		/*
 		AgentController light2Agent = cc.createNewAgent("lightAgent2",
 				"smarthouse.lightagent.LightAgent", null);
@@ -76,14 +77,14 @@ public class Main {
 		// Fire up the agent
 		simulation.start();
 		
-		
+		/*
 
 		// Pour la creation du second agent sur un conteneur non principal
 		// utiliser cette fonction sinon de/commenter
 		// en reseau exactemment la meme chose en remplacant l'IP
 		// par le localhost de la machine distante.
 		// createNotmain();
-		
+		*/
 
 		
 	}

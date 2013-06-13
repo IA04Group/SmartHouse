@@ -28,7 +28,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 			System.out.println("New light ! : " + message.getSender());
 		
 			ObjectMapper objectMapper = new ObjectMapper();
-			MessageContent data = new MessageContent(current_lights, "", "");
+			MessageContent data = new MessageContent(current_lights, "autoswitch", "placeRandom");
 			String answer;
 			
 			try {
@@ -37,7 +37,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 				answer = "";
 				e.printStackTrace();
 			}
-			
+			System.out.println("fin action Subscribe : " + answer);
 			reponse.setContent(answer);
 			reponse.addReceiver(message.getSender());
 			myAgent.send(reponse);
@@ -49,7 +49,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 
 	@Override
 	public boolean done() {
-		return Constants.NBR_MAX_LIGHTS < current_lights;
+		return Constants.NBR_MAX_LIGHTS <= current_lights;
 	}
 
 }
