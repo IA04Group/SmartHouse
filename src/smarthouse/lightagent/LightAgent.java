@@ -14,6 +14,7 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class LightAgent extends Agent {
 	
+	private int position = -1; // registered number in autoswitch
 	private boolean state = false; // false off, true on
 
 
@@ -65,6 +66,14 @@ public class LightAgent extends Agent {
 	public void changeState() {
 		this.state = !this.state;
 		
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 	
