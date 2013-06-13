@@ -33,6 +33,8 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 
 		Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
 		int id = Integer.parseInt(json.getContent().get(0));
+		//TODO marche pas sous jre6
+		/*
 		switch (json.getType()) {
 			case "light":
 				room.setLight(id, json.getValue() > 0);
@@ -46,6 +48,19 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 			case "window":
 				room.setWindow(id, json.getValue() > 0);
 				break;
+		}*/
+		String s = json.getType();
+		if(s.equals("light")) {
+			room.setLight(id, json.getValue() > 0);
+		}
+		else if(s.equals("shutter")) {
+			room.setShutter(id, json.getValue() > 0);
+		}
+		else if(s.equals("heater")) {
+			room.setHeater(id, json.getValue() > 0);
+		}
+		else if(s.equals("window")) {
+			room.setWindow(id, json.getValue() > 0);
 		}
 	}
 }
