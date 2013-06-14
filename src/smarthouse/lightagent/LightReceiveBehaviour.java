@@ -24,13 +24,15 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);		
 		ACLMessage message = myAgent.receive(template);
 			
-		if (message != null) {
+		if (message != null ) {
 			ACLMessage reply = this.parse(message);
+			System.out.println("test");
 			myAgent.send(reply);
+			System.out.println(message.getSender());
 		}else{
 			block();
 		}
-		
+	
 		
 	}
 	
@@ -50,6 +52,7 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
                         for (DFAgentDescription receiver : result) {
                                 if (!receiver.getName().equals(myAgent.getAID())) {
                                         request.addReceiver(receiver.getName());
+                                       
                                 }
                         }
                         request.setContent(json);

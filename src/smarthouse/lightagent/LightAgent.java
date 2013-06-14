@@ -20,16 +20,18 @@ public class LightAgent extends Agent {
 
 	public void setup(){
 		
-		SequentialBehaviour seqbhv = new SequentialBehaviour();
+		//SequentialBehaviour seqbhv = new SequentialBehaviour();
 		
 		// register to autoswitch
-		seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
+		//seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
 		
 		// traitement requêtes capteurs/interactions
-		seqbhv.addSubBehaviour(new AutoSwitchRequestsBehaviour());
+		//seqbhv.addSubBehaviour(new AutoSwitchRequestsBehaviour());
 		//seqbhv.addSubBehaviour(new SwitchBehaviour());
 		
-		this.addBehaviour(seqbhv);
+		
+		//this.addBehaviour(seqbhv);
+		this.addBehaviour(new LightReceiveBehaviour());
 		//this.subscribeToSwitch();
 	}
 	

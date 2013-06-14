@@ -10,11 +10,19 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
+
+import Data.MessageContent;
 
 
 // teste avec l'arduino marche niquel !!
@@ -86,22 +94,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		
 	}
 
-	@Override
-	public void action() {
-		
-		// TODO Auto-generated method stub
-		System.out.println(inputLine);
-		jade.lang.acl.ACLMessage msg=myAgent.receive();
-		if(msg!=null){
-			System.out.println(inputLine);
-		}else{
-			block();
-		}
-		
-	
-		
-	
-	}
+
 
 
 	/**
@@ -119,6 +112,57 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
+	
+	
+	@Override
+	public void action() {
+		
+		System.out.println(inputLine);
+		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);		
+		ACLMessage message = myAgent.receive(template);
+			
+		if (message != null ) {
+			ACLMessage reply = this.parse(message);
+			System.out.println("light sensor ready to send");
+			myAgent.send(reply);
+		
+		}else{
+			block();
+		}
+		
+	
+	}
+	
+
+	
+	private ACLMessage parse(ACLMessage message){
+		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
+		MessageContent messageContent = new MessageContent(0, Constants.Constants.LightAgent, Constants.Constants.OutdoorPlace, inputLine);
+		String json = messageContent.toJSON();
+		DFAgentDescription template = new DFAgentDescription();
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType(Constants.Constants.AutoSwitch);
+        sd.setName(Constants.Constants.AutoSwitchAgent);
+        template.addServices(sd);
+        try {
+                DFAgentDescription[] result = DFService.search(myAgent, template);
+                if (result.length > 0) {
+                        ACLMessage request = new ACLMessage(ACLMessage.INFORM);
+                        for (DFAgentDescription receiver : result) {
+                                if (!receiver.getName().equals(myAgent.getAID())) {
+                                        request.addReceiver(receiver.getName());
+                                       
+                                }
+                        }
+                        request.setContent(json);
+                        myAgent.send(request);
+                }
+        } catch(FIPAException fe) {
+                fe.printStackTrace();
+        }
+		return message;
+	}
+	
 		
 		
 	
