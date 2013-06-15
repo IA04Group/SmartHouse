@@ -1,5 +1,6 @@
 package smarthouse.lightagent;
 
+import Data.Constants;
 import smarthouse.autoswitchagent.AutoSwitchRequestsBehaviour;
 import smarthouse.autoswitchagent.AutoSwitchSubscribeBehaviour;
 import jade.core.AID;
@@ -41,7 +42,7 @@ public class LightAgent extends Agent {
 		
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType("AutoSwitch");
+		sd.setType(Constants.AUTO_SWITCH);
 		template.addServices(sd);
 		
 		DFAgentDescription[] result = null;

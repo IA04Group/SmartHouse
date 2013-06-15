@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
+import Data.Constants;
 import Data.MessageContent;
 
 
@@ -137,12 +138,12 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 	
 	private ACLMessage parse(ACLMessage message){
 		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
-		MessageContent messageContent = new MessageContent(0, Constants.Constants.LightAgent, Constants.Constants.OutdoorPlace, inputLine);
+		MessageContent messageContent = new MessageContent(0, Constants.LIGHT_AGENT, Constants.OUTDOOR_PLACE, inputLine);
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
-        sd.setType(Constants.Constants.AutoSwitch);
-        sd.setName(Constants.Constants.AutoSwitchAgent);
+        sd.setType(Constants.AUTO_SWITCH);
+        sd.setName(Constants.AUTO_SWITCH_AGENT);
         template.addServices(sd);
         try {
                 DFAgentDescription[] result = DFService.search(myAgent, template);

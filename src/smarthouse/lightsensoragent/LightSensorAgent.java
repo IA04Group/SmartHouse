@@ -1,5 +1,6 @@
 package smarthouse.lightsensoragent;
 
+import Data.Constants;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -18,8 +19,8 @@ public class LightSensorAgent extends Agent {
 		DFAgentDescription dfd = new  DFAgentDescription();
 		dfd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType(Constants.Constants.LightAgent);
-		sd.setName(Constants.Constants.LightSensorAgent);
+		sd.setType(Constants.LIGHT_AGENT);
+		sd.setName(Constants.LIGHT_SENSOR_AGENT);
 		dfd.addServices(sd);
 		try {
 			DFService.register(this, dfd);

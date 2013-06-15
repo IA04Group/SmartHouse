@@ -2,6 +2,7 @@ package smarthouse.autoswitchagent;
 
 import java.io.IOException;
 
+import Data.Constants;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -37,6 +38,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			}
 			
 			// TODO switch sur les differents request possibles
+			if(d.getPlace().equals(Constants.OUTDOOR_PLACE)) {
+				
+			}
 			
 		}else{
 			block();
@@ -49,7 +53,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	 */
 	public void sendLightRequest(int lightId, int order) {
 		String s = "" + order;
-		MessageContent d = new MessageContent(lightId, "autoswitch", s);
+		MessageContent d = new MessageContent(lightId, Constants.AUTO_SWITCH, s);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String answer;
@@ -72,7 +76,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	 * 
 	 */
 	public void sendBadRequest(AID sender, String message) {
-		MessageContent d = new MessageContent(0, "autoswitch", message);
+		MessageContent d = new MessageContent(0, Constants.AUTO_SWITCH, message);
 		
 
 		ObjectMapper objectMapper = new ObjectMapper();

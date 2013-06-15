@@ -2,6 +2,8 @@ package smarthouse.autoswitchagent;
 
 import java.util.ArrayList;
 
+import Data.Constants;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
@@ -32,8 +34,8 @@ public class AutoSwitchAgent extends Agent {
 		DFAgentDescription dfd = new  DFAgentDescription();
 		dfd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType("AutoSwitch");
-		sd.setName("AutoSwitchAgent");
+		sd.setType(Constants.AUTO_SWITCH);
+		sd.setName(Constants.AUTO_SWITCH_AGENT);
 		dfd.addServices(sd);
 		try {
 			DFService.register(this, dfd);

@@ -2,6 +2,7 @@ package smarthouse.lightagent;
 
 import java.io.IOException;
 
+import Data.Constants;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -37,8 +38,8 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 	}
 	
 	private ACLMessage parse(ACLMessage message){
-		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
-		MessageContent messageContent = new MessageContent(1, "light", "kitchen", "0");
+		// 1 pour allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
+		MessageContent messageContent = new MessageContent(1, Constants.LIGHT_AGENT, "kitchen", "0");
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
