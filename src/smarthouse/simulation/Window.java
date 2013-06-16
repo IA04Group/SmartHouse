@@ -27,7 +27,7 @@ public class Window extends JComponent implements MouseListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.setColor(Color.GRAY);
+		g.setColor(new Color(150, 200, 255));
 
 		if (open) {
 			if (vertical) {

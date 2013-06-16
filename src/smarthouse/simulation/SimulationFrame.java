@@ -62,23 +62,27 @@ public class SimulationFrame extends JFrame {
 		getContentPane().add(bedroom);
 
 		/* Living room's furniture */
-		livingroom.addLight(1, 1, 10);
+		livingroom.addLight(6, 6, 10);
 		livingroom.addLight(155, 235, 10);
 		livingroom.addShutter(0, 100, 40, true);
 		livingroom.addShutter(0, 340, 40, true);
-		livingroom.addHeater(140, 5, 40, false);
-		livingroom.addHeater(140, 464, 40, false);
+		livingroom.addWindow(5, 100, 40, true);
+		livingroom.addWindow(5, 340, 40, true);
+		livingroom.addHeater(140, 10, 40, false);
+		livingroom.addHeater(140, 459, 40, false);
 
 		/* Kitchen's furniture */
 		kitchen.addLight(155, 115, 10);
 		kitchen.addShutter(315, 100, 40, true);
-		kitchen.addHeater(140, 224, 40, false);
+		kitchen.addWindow(310, 100, 40, true);
+		kitchen.addHeater(140, 219, 40, false);
 
 		/* Bedroom's furniture */
-		bedroom.addLight(305, 85, 10);
-		bedroom.addLight(305, 135, 10);
+		bedroom.addLight(300, 85, 10);
+		bedroom.addLight(300, 135, 10);
 		bedroom.addShutter(140, 235, 40, false);
-		bedroom.addHeater(140, 5, 40, false);
+		bedroom.addWindow(140, 230, 40, false);
+		bedroom.addHeater(140, 10, 40, false);
 
 		/* Time UI */
 		time = new JTextField("7:00",5);

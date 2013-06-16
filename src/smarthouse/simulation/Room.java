@@ -36,7 +36,7 @@ public class Room extends JComponent {
 			c = c.darker();
 		}
 		g.setColor(c);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.fillRect(5, 5, getWidth() - 10, getHeight() - 10);
 	}
 
 	public void tick() {
