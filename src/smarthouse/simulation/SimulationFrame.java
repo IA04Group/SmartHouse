@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import Data.Constants;
+
 public class SimulationFrame extends JFrame {
 	public static String days[] = {"Monday", "Tuesday", "Wednesday",
 		"Thursday", "Friday", "Saturday", "Sunday"};
@@ -49,9 +51,9 @@ public class SimulationFrame extends JFrame {
 		Room kitchen = new Room(320, 240, Color.RED);
 		Room bedroom = new Room(320, 240, Color.BLUE);
 
-		rooms.put("livingroom", livingroom);
-		rooms.put("kitchen", kitchen);
-		rooms.put("bedroom", bedroom);
+		rooms.put(Constants.PLACE_LIVINGROOM, livingroom);
+		rooms.put(Constants.PLACE_KITCHEN, kitchen);
+		rooms.put(Constants.PLACE_BEDROOM, bedroom);
 
 		livingroom.setLocation(10, 10);
 		kitchen.setLocation(330, 10);

@@ -6,6 +6,7 @@ import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
 
+import Data.Constants;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,33 +34,17 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 
 		Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
 		int id = Integer.parseInt(json.getContent().get(0));
-		//TODO marche pas sous jre6
-		/*
-		switch (json.getType()) {
-			case "light":
-				room.setLight(id, json.getValue() > 0);
-				break;
-			case "shutter":
-				room.setShutter(id, json.getValue() > 0);
-				break;
-			case "heater":
-				room.setHeater(id, json.getValue() > 0);
-				break;
-			case "window":
-				room.setWindow(id, json.getValue() > 0);
-				break;
-		}*/
 		String s = json.getType();
-		if(s.equals("light")) {
+		if(s.equals(Constants.LIGHT)) {
 			room.setLight(id, json.getValue() > 0);
 		}
-		else if(s.equals("shutter")) {
+		else if(s.equals(Constants.SHUTTER)) {
 			room.setShutter(id, json.getValue() > 0);
 		}
-		else if(s.equals("heater")) {
+		else if(s.equals(Constants.HEATER)) {
 			room.setHeater(id, json.getValue() > 0);
 		}
-		else if(s.equals("window")) {
+		else if(s.equals(Constants.WINDOW)) {
 			room.setWindow(id, json.getValue() > 0);
 		}
 	}

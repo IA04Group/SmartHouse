@@ -1,5 +1,6 @@
 package smarthouse.simulation;
 
+import Data.Constants;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -20,8 +21,8 @@ public class SimulationAgent extends GuiAgent {
 		DFAgentDescription dfd = new DFAgentDescription();
 		dfd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType("GUI");
-		sd.setName("Simulation");
+		sd.setType(Constants.SIMULATION);
+		sd.setName(Constants.SIMULATION_AGENT);
 		dfd.addServices(sd);
 		try {
 			DFService.register(this, dfd);

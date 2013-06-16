@@ -43,8 +43,8 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
-        sd.setType("GUI");
-        sd.setName("Simulation");
+        sd.setType(Constants.SIMULATION);
+        sd.setName(Constants.SIMULATION_AGENT);
         template.addServices(sd);
         try {
                 DFAgentDescription[] result = DFService.search(myAgent, template);
