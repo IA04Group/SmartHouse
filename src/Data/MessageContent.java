@@ -132,6 +132,7 @@ public class MessageContent {
 		this.content = content;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String toJSON(){
 		//construction du contenu du message en type JSON
 		ObjectMapper mapper = new ObjectMapper();

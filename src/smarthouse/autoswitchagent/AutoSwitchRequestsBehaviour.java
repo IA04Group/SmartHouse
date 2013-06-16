@@ -3,6 +3,7 @@ package smarthouse.autoswitchagent;
 import java.io.IOException;
 
 import Data.Constants;
+import Data.LightData;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -38,8 +39,60 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			}
 			
 			// TODO switch sur les differents request possibles
-			if(d.getPlace().equals(Constants.OUTDOOR_PLACE)) {
-				
+			/*
+			 * algo:
+			 *  - which room
+			 *  - which light
+			 *  - is day ?
+			 *  - YES : send error
+			 *  - No : send light up
+			 *  
+			 *  STIL TODO
+			 *  - return YES : return yes
+			 *  - return NO : return no
+			 * 
+			 */
+			LightData ld = null;
+			int lightN = 0;
+			if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
+				if(ld != null) {
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+				}
+				else {
+					sendBadRequest(message.getSender(), "Lumière introuvable");
+				}
+			}
+			else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_BEDROOM, lightN);
+				if(ld != null) {
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+				}
+				else {
+					sendBadRequest(message.getSender(), "Lumière introuvable");
+				}
+			}
+			else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_LIVINGROOM, lightN);
+				if(ld != null) {
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+				}
+				else {
+					sendBadRequest(message.getSender(), "Lumière introuvable");
+				}
+			}
+			else {
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_RANDOM, lightN);
+				if(ld != null) {
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+				}
+				else {
+					sendBadRequest(message.getSender(), "Lumière introuvable");
+				}
 			}
 			
 		}else{
@@ -49,11 +102,10 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	
 	/*
 	 *  send order to Light number lightId
-	 *  lightId : assuming existing in the lights arraylist
+	 *  lightId : an existing lightagent
 	 */
-	public void sendLightRequest(int lightId, int order) {
-		String s = "" + order;
-		MessageContent d = new MessageContent(lightId, Constants.AUTO_SWITCH, s);
+	public void sendLightRequest(AID lightId, int order) {
+		MessageContent d = new MessageContent(order, Constants.AUTO_SWITCH, "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String answer;
@@ -64,10 +116,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			answer = "";
 			e.printStackTrace();
 		}
-		System.out.println("fin action Subscribe : " + answer);
 		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
 		msg.setContent(answer);
-		msg.addReceiver(((AutoSwitchAgent)myAgent).lights.get(lightId));
+		msg.addReceiver(lightId);
 		myAgent.send(msg);
 	}
 	

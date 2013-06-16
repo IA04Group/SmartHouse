@@ -1,7 +1,10 @@
 package smarthouse.lightagent;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import Data.Constants;
-import smarthouse.autoswitchagent.AutoSwitchRequestsBehaviour;
+import Data.MessageContent;
 import smarthouse.autoswitchagent.AutoSwitchSubscribeBehaviour;
 import jade.core.AID;
 import jade.core.Agent;
@@ -17,26 +20,39 @@ public class LightAgent extends Agent {
 	
 	private int position = -1; // registered number in autoswitch
 	private boolean state = false; // false off, true on
+	private String place = "";
 
 
 	public void setup(){
+		try {
+			String[] args = (String[]) getArguments();
+			place = args[0];
+		}
+		catch(Exception e) {
+			place = Constants.PLACE_RANDOM;
+		}
 		
-		//SequentialBehaviour seqbhv = new SequentialBehaviour();
+		SequentialBehaviour seqbhv = new SequentialBehaviour();
 		
 		// register to autoswitch
-		//seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
+		seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
 		
+		//TODO delete that
 		// traitement requêtes capteurs/interactions
 		//seqbhv.addSubBehaviour(new AutoSwitchRequestsBehaviour());
 		//seqbhv.addSubBehaviour(new SwitchBehaviour());
 		
 		
 		//this.addBehaviour(seqbhv);
-		this.addBehaviour(new LightReceiveBehaviour());
-		//this.subscribeToSwitch();
+		seqbhv.addSubBehaviour(new LightReceiveBehaviour());
+		
+		// and there we're starting
+		this.subscribeToSwitch();
 	}
 	
 	public void subscribeToSwitch() {
+		System.out.println("ON DEMARRE LES LIGHTS !!!!!!!!!");
+
 		AID autoSwitch = null;
 		ACLMessage message = new ACLMessage(ACLMessage.SUBSCRIBE);
 		
@@ -52,10 +68,23 @@ public class LightAgent extends Agent {
 			if(result.length > 0) {
 				autoSwitch = result[0].getName();
 				message.addReceiver(autoSwitch);
-				send(message);
+				
+				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, this.place);
+				ObjectMapper objectMapper = new ObjectMapper();
+				
+				String answer = "";
+				try {
+					answer = objectMapper.writeValueAsString(d);
+					System.out.println("LIGHT on send : " + answer);
+					message.setContent(answer);
+					
+					send(message);
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				}
 			}
 			else {
-				System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
+				//System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
 				subscribeToSwitch();
 			}
 		} catch (FIPAException e) {
@@ -75,6 +104,14 @@ public class LightAgent extends Agent {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	
 	

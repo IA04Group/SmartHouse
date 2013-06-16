@@ -1,5 +1,6 @@
 package smarthouse;
 
+import Data.Constants;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -42,9 +43,9 @@ public class Main {
 		
 		// Create a new agent
 		// and pass it a reference to an Object
-		AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
+		//AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
 		// Fire up the agent
-		remoteControlAgent.start();
+		//remoteControlAgent.start();
 		
 		/*
 		 * NICO's stuff
@@ -56,26 +57,34 @@ public class Main {
 		// Fire up the agent
 		autoSwitchAgent.start();
 
+		String[] param = new String[1];
+		
+		param[0] = Constants.PLACE_BEDROOM;
 		AgentController light1Agent = cc.createNewAgent("lightAgent1",
-				"smarthouse.lightagent.LightAgent", null);
+				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light1Agent.start();
 		
-		/*
+		param[0] = Constants.PLACE_BEDROOM;
 		AgentController light2Agent = cc.createNewAgent("lightAgent2",
-				"smarthouse.lightagent.LightAgent", null);
+				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light2Agent.start();
 		
+		param[0] = Constants.PLACE_LIVINGROOM;
 		AgentController light3Agent = cc.createNewAgent("lightAgent3",
-				"smarthouse.lightagent.LightAgent", null);
+				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light3Agent.start();
-		*/
 		
-		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		/*
+		 * 
+		 * END NICO's stuff
+		 */
+		
+		//AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		// Fire up the agent
-		simulation.start();
+		//simulation.start();
 		
 		/*
 

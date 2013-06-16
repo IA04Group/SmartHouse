@@ -8,12 +8,21 @@ public class Constants {
 	public static final int NBR_MAX_LIGHTS = 3;
 
 	/*
-	 * je comprends pas l'interet... L'agent DF peut le faire
+	 * agents
 	 */
 	public static final String AUTO_SWITCH_AGENT = "AutoSwitchAgent";
 	public static final String AUTO_SWITCH =  "AutoSwitch";
-	public static final String LIGHT_SENSOR_AGENT = "LghtSensorAgent";
+	public static final String LIGHT_SENSOR_AGENT = "LightSensorAgent";
 	public static final String LIGHT_AGENT=  "LightAgent";
-	public static final String OUTDOOR_PLACE=  "OutdoorPlace";
+	
+	
+	/* 
+	 * places
+	 */
+	public static final String PLACE_OUTDOOR=  "outdoor";
+	public static final String PLACE_BEDROOM=  "bedroom";
+	public static final String PLACE_LIVINGROOM=  "livingroom";
+	public static final String PLACE_RANDOM = "random";
+
 	  
 }
