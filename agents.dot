@@ -11,7 +11,6 @@ digraph {
     shutter [label="volet"];
     heater [label="chauffage"];
     thermometer [label="thermomètre"];
-    player [label="lecteur multimédia"];
 
     /* Agents */
     node [shape=oval, style=""];
@@ -22,15 +21,14 @@ digraph {
     Akinect [label="Agent Kinect"];
     Alight [label="Agent lumière"];
     Alightsensor [label="Agent détecteur de lumière"];
+    Atemperature [label="Agent thermomètre"];
     Awindow [label="Agent fenêtre"];
     Ashutter [label="Agent volet"];
     Aheater [label="Agent chauffage"];
-    Atemperature [label="Agent thermomètre"];
-    Aplayer [label="Agent multimédia"];
 
     /* Acquaintance agent <=> physical process */
     edge [arrowhead=none, arrowtail=none];
-    Aandroid -> user;
+    user ->Aandroid;
     Aautoswitch -> user;
     Acoffee -> coffee;
     Aplanning -> dbplanning;
@@ -40,16 +38,12 @@ digraph {
     Awindow -> window;
     Ashutter -> shutter;
     Aheater -> heater;
-    Atemperature -> thermometer;
-    Aplayer -> player;
+    thermometer -> Atemperature;
 
     /* Acquaintance agent <=> agent */
     edge [arrowhead=normal, arrowtail=normal, dir=both];
-    Aandroid -> {Aautoswitch, Acoffee, Aplanning, Aplayer};
-    Aautoswitch -> {Akinect, Alightsensor, Alight, Aplanning};
-    Acoffee -> {Aplanning};
-    Aplanning -> {Ashutter, Aheater, Atemperature};
-    Awindow -> {Aheater};
-    Ashutter -> {Aheater};
-    Aheater -> {Atemperature};
+    Aplanning -> {Acoffee, Aandroid, Aautoswitch}
+    Aandroid -> {Aautoswitch, Acoffee};
+    Aautoswitch -> {Akinect, Alightsensor, Alight};
+    Atemperature -> {Aplanning, Awindow, Ashutter, Aheater};
 }
