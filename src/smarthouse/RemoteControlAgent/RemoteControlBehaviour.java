@@ -11,6 +11,10 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
 import java.io.BufferedReader;
@@ -20,6 +24,7 @@ import java.util.Enumeration;
 
 import smarthouse.lightagent.LightAgent;
 import Data.MessageContent;
+import Data.Constants;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -130,29 +135,55 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
 	}
 	
 	private void sendSignal(){
-		
-		ACLMessage reponse = new ACLMessage(ACLMessage.INFORM);
-		ObjectMapper objectMapper = new ObjectMapper();
-		Data.MessageContent messageContent  = new MessageContent(0, "User remote", "");
-		String toGUI;
-	
-		try {
-			toGUI = objectMapper.writeValueAsString(messageContent);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			toGUI= "";
-			e.printStackTrace();
+		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
+		System.out.println(inputLine + "test");
+		MessageContent messageContent = new MessageContent(0, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_RANDOM);
+		if(inputLine.equals(Constants.BUTTON_1_OFF)){
+			messageContent = new MessageContent(0, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_BEDROOM);
+		}else if(inputLine.equals(Constants.BUTTON_1_ON)){
+			messageContent = new MessageContent(1, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_BEDROOM);
+		}else if(inputLine.equals(Constants.BUTTON_2_OFF)){
+			messageContent = new MessageContent(0, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_KITCHEN);
+		}else if(inputLine.equals(Constants.BUTTON_2_ON)){
+			messageContent = new MessageContent(1, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_KITCHEN);
+		}else if(inputLine.equals(Constants.BUTTON_3_OFF)){
+			messageContent = new MessageContent(0, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_LIVINGROOM);
+		}else if(inputLine.equals(Constants.BUTTON_3_ON)){
+			messageContent = new MessageContent(1, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_RANDOM);
+		}else if(inputLine.equals(Constants.BUTTON_4_OFF)){
+			messageContent = new MessageContent(0, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_RANDOM);
+		}else if(inputLine.equals(Constants.BUTTON_4_ON)){
+			messageContent = new MessageContent(1, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_BEDROOM);
+			System.out.println("oh yeah");
 		}
-		
-		
-		reponse.setContent(toGUI);
-		// provisore faire page blanche
-		reponse.addReceiver(new AID("lightAgentCuisine"));
-		System.out.println(reponse);
-		myAgent.send(reponse);
-		
+				
+		String json = messageContent.toJSON();
+		DFAgentDescription template = new DFAgentDescription();
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType(Constants.AUTO_SWITCH);
+        sd.setName(Constants.AUTO_SWITCH_AGENT);
+        template.addServices(sd);
+        try {
+                DFAgentDescription[] result = DFService.search(myAgent, template);
+                if (result.length > 0) {
+                        ACLMessage request = new ACLMessage(ACLMessage.INFORM);
+                        for (DFAgentDescription receiver : result) {
+                                if (!receiver.getName().equals(myAgent.getAID())) {
+                                        request.addReceiver(receiver.getName());
+                                       
+                                }
+                        }
+                        request.setContent(json);
+                        myAgent.send(request);
+                }
+        } catch(FIPAException fe) {
+                fe.printStackTrace();
+        }
+
+
 	}
-		
+	
+
 	
 
 	
