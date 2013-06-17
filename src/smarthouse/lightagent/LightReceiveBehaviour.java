@@ -6,17 +6,15 @@ import Data.Constants;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jade.core.behaviours.CyclicBehaviour;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
+@SuppressWarnings("serial")
 public class LightReceiveBehaviour extends CyclicBehaviour{
 
 	@Override
@@ -27,7 +25,7 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 			
 		if (message != null ) {
 			ACLMessage reply = this.parse(message);
-			System.out.println("test");
+			System.out.println("envoi code reponse");
 			myAgent.send(reply);
 			System.out.println(message.getSender());
 		}else{
@@ -38,9 +36,49 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 	}
 	
 	private ACLMessage parse(ACLMessage message){
+		ACLMessage answer;
+		// parsing
+		ObjectMapper objectMapper = new ObjectMapper();
+		MessageContent content = null;
+		try {
+			content = objectMapper.readValue(message.getContent(), MessageContent.class);
+		} catch (JsonParseException e1) {
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		// test valeur
+		if( ( ((LightAgent)myAgent).getLightState() &&  content.getValue()==1) 
+				|| ( !((LightAgent)myAgent).getLightState() &&  content.getValue()==0)) {
+			// already done
+			answer = new ACLMessage(ACLMessage.FAILURE);
+		}
+		else {
+			//state change
+			 ((LightAgent)myAgent).changeState();
+			 answer = new ACLMessage(ACLMessage.INFORM);
+		}
+
+		MessageContent answerContent = new MessageContent(content.getValue(), 
+							Constants.LIGHT_AGENT, ((LightAgent)myAgent).getPlace());
+		
+		String res = "";
+		try {
+			res = objectMapper.writeValueAsString(answerContent);
+			answer.setContent(res);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		answer.addReceiver(message.getSender());
+		return answer;
+		
 		// 1 pour allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
-		MessageContent messageContent = new MessageContent(1, Constants.LIGHT_AGENT, "kitchen", "0");
-		String json = messageContent.toJSON();
+		//MessageContent messageContent = new MessageContent(1, Constants.LIGHT_AGENT, "kitchen", "0");
+		/*String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
         sd.setType(Constants.SIMULATION);
@@ -63,7 +101,7 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
                 fe.printStackTrace();
         }
 		return message;
-
+		 */
 		
 	
 		

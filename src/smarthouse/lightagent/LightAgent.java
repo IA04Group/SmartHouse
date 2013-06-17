@@ -36,13 +36,7 @@ public class LightAgent extends Agent {
 		
 		// register to autoswitch
 		seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
-		
-		//TODO delete that
-		// traitement requêtes capteurs/interactions
-		//seqbhv.addSubBehaviour(new AutoSwitchRequestsBehaviour());
-		//seqbhv.addSubBehaviour(new SwitchBehaviour());
-		
-		
+				
 		//this.addBehaviour(seqbhv);
 		seqbhv.addSubBehaviour(new LightReceiveBehaviour());
 		
@@ -51,8 +45,6 @@ public class LightAgent extends Agent {
 	}
 	
 	public void subscribeToSwitch() {
-		System.out.println("ON DEMARRE LES LIGHTS !!!!!!!!!");
-
 		AID autoSwitch = null;
 		ACLMessage message = new ACLMessage(ACLMessage.SUBSCRIBE);
 		
@@ -84,7 +76,7 @@ public class LightAgent extends Agent {
 				}
 			}
 			else {
-				//System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
+				System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
 				subscribeToSwitch();
 			}
 		} catch (FIPAException e) {
@@ -114,6 +106,8 @@ public class LightAgent extends Agent {
 		this.place = place;
 	}
 	
-	
+	public boolean getLightState() {
+		return this.state;
+	}
 
 }
