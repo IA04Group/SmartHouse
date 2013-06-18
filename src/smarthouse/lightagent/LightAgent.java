@@ -65,7 +65,7 @@ public class LightAgent extends Agent {
 				autoSwitch = result[0].getName();
 				message.addReceiver(autoSwitch);
 				
-				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, this.place);
+				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, this.place, "");
 				ObjectMapper objectMapper = new ObjectMapper();
 				
 				String answer = "";

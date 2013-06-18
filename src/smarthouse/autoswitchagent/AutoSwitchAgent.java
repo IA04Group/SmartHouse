@@ -34,18 +34,18 @@ public class AutoSwitchAgent extends Agent {
 	public void setup(){
 		
 		// setup arraylist
-		this.lightsPerRoom.set(0, 0);
-		this.lightsPerRoom.set(1, 0);
-		this.lightsPerRoom.set(2, 0);
-		this.lightsPerRoom.set(3, 0);
-		this.lightsPerRoom.set(4, 0);
+		this.lightsPerRoom.add(0);
+		this.lightsPerRoom.add(0);
+		this.lightsPerRoom.add(0);
+		this.lightsPerRoom.add(0);
+		this.lightsPerRoom.add(0);
 		
 		
 		SequentialBehaviour seqbhv = new SequentialBehaviour();
 		
 		// register lights
 		seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
-		
+		System.out.println("Premier subbhv registered");
 		// answer requests
 		seqbhv.addSubBehaviour(new AutoSwitchRequestsBehaviour());
 		

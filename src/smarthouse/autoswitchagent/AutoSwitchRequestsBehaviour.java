@@ -1,6 +1,7 @@
 package smarthouse.autoswitchagent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import Data.Constants;
 import Data.LightData;
@@ -13,6 +14,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -45,50 +50,88 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			 *  - which light
 			 *  - is day ?
 			 *  - YES : send error
-			 *  - No : send light up
+			 *  - No : send lightagent msg
 			 *  
-			 *  STIL TODO
-			 *  - return YES : return yes
-			 *  - return NO : return no
 			 * 
 			 */
+			
+			// is day ?
+			boolean isDay = false;
+			
+			try {
+				sendDetectorRequest(d.getPlace());
+			}
+			catch(FIPAException fe) {
+				return;
+			}
+			
+			
+			if(d.getType().equals(Constants.LIGHT_SENSOR_AGENT)) {
+				if(d.getValue() == 0) {
+					isDay = false;
+				}
+				else {
+					isDay = true;
+				}
+			}
+			
+			
+			
+			if(isDay) {
+				sendBadRequest(message.getSender(), "Il fait deja jour");
+				return;
+			}
+			// light processing
+			
 			LightData ld = null;
+			AID sender = message.getSender();
+			
 			int lightN = 0;
 			if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
 				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
 				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
 					sendBadRequest(message.getSender(), "Lumière introuvable");
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(1);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_BEDROOM, lightN);
 				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
 					sendBadRequest(message.getSender(), "Lumière introuvable");
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(2);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_LIVINGROOM, lightN);
 				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+				}
+				else {
+					sendBadRequest(message.getSender(), "Lumière introuvable");
+				}
+			}
+			else if(d.getPlace().equals(Constants.PLACE_KITCHEN)) {
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(3);
+				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_KITCHEN, lightN);
+				if(ld != null) {
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
 					sendBadRequest(message.getSender(), "Lumière introuvable");
 				}
 			}
 			else {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
+				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(4);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_RANDOM, lightN);
 				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue());
+					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
 					sendBadRequest(message.getSender(), "Lumière introuvable");
@@ -101,16 +144,44 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	}
 	
 	/*
+	 * ask LightDetector if there is already light
+	 */
+	private void sendDetectorRequest(String place) throws FIPAException {
+		ACLMessage message = new ACLMessage(ACLMessage.REQUEST);
+		AID receiver =null;
+		
+		DFAgentDescription template = new DFAgentDescription();
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType(Constants.LIGHT_SENSOR_AGENT);
+		template.addServices(sd);
+		
+		DFAgentDescription[] result = null;
+		result = DFService.search(myAgent, template);
+        System.out.println(result.length + " light detector(s)" );
+		if(result.length > 0) {
+			receiver = result[0].getName();
+			message.addReceiver(receiver);
+							
+			myAgent.send(message);
+		}
+	}
+
+	/*
 	 *  send order to Light number lightId
 	 *  lightId : an existing lightagent
 	 */
-	public void sendLightRequest(AID lightId, int order) {
+	public void sendLightRequest(AID lightId, int order, AID sender) {
 		MessageContent d = new MessageContent(order, Constants.AUTO_SWITCH, "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String answer;
+		String aid;
+		ArrayList<String> c = new ArrayList<String>();
 		
 		try {
+			aid = objectMapper.writeValueAsString(sender);
+			c.set(0,aid);
+			d.setContent(c);
 			answer = objectMapper.writeValueAsString(d);
 		} catch (JsonProcessingException e) {
 			answer = "";
