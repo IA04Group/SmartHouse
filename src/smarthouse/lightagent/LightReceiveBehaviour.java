@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -73,7 +74,10 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 			e.printStackTrace();
 		}
 		
-		answer.addReceiver(message.getSender());
+		//retrieve sender
+		AID sender = ((LightAgent) myAgent).getAIDFromString(content.getContent().get(0));
+		
+		answer.addReceiver(sender);
 		return answer;
 		
 		// 1 pour allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere

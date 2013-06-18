@@ -24,13 +24,21 @@ public class AutoSwitchAgent extends Agent {
 	 * 0 : outdoor
 	 * 1 : bedroom
 	 * 2 : livingroom
-	 * 3 : random
+	 * 3 : kitchen
+	 * 4 : random
 	 * 
 	 * 
 	 */
-	private ArrayList<Integer> lightsPerRoom = new ArrayList<Integer>(4);
+	private ArrayList<Integer> lightsPerRoom = new ArrayList<Integer>(Constants.NBR_PLACES);
 	
 	public void setup(){
+		
+		// setup arraylist
+		this.lightsPerRoom.set(0, 0);
+		this.lightsPerRoom.set(1, 0);
+		this.lightsPerRoom.set(2, 0);
+		this.lightsPerRoom.set(3, 0);
+		this.lightsPerRoom.set(4, 0);
 		
 		
 		SequentialBehaviour seqbhv = new SequentialBehaviour();
@@ -95,13 +103,21 @@ public class AutoSwitchAgent extends Agent {
 				lightsPerRoom.set(2, 1);
 			return lightsPerRoom.get(2);
 		}
-		else  { // random
+		else if(place.equals(Constants.PLACE_KITCHEN)){
 			i = lightsPerRoom.get(3);
 			if(Integer.valueOf(i) != null)
 				lightsPerRoom.set(3, i+1);
 			else
 				lightsPerRoom.set(3, 1);
 			return lightsPerRoom.get(3);
+		}
+		else  { // random
+			i = lightsPerRoom.get(4);
+			if(Integer.valueOf(i) != null)
+				lightsPerRoom.set(4, i+1);
+			else
+				lightsPerRoom.set(4, 1);
+			return lightsPerRoom.get(4);
 		}
 	}
 

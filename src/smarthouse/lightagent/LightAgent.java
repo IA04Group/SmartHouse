@@ -1,6 +1,10 @@
 package smarthouse.lightagent;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Data.Constants;
@@ -108,6 +112,22 @@ public class LightAgent extends Agent {
 	
 	public boolean getLightState() {
 		return this.state;
+	}
+	
+	public AID getAIDFromString(String sender) {
+		AID id = null;
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			id = objectMapper.readValue(sender, AID.class);
+		} catch (JsonParseException e1) {
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		return id;
 	}
 
 }

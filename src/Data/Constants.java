@@ -21,6 +21,7 @@ public class Constants {
 	/* 
 	 * places
 	 */
+	public static final int NBR_PLACES = 5;
 	public static final String PLACE_OUTDOOR = "outdoor";
 	public static final String PLACE_BEDROOM = "bedroom";
 	public static final String PLACE_LIVINGROOM = "livingroom";
