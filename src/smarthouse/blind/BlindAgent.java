@@ -18,7 +18,7 @@ public class BlindAgent extends Agent{
 		//récupérer la position de l'agent passé en argument à la création de l'agent (voir smarthouse/Main.java)
 		Object[] tab = getArguments();
 		place = (String)tab[0];
-		id = (int)tab[0];
+		id = (Integer)tab[0];
 		
 		//Enregistrement de l'agent GUI
 		DFAgentDescription dfd = new DFAgentDescription();

@@ -7,11 +7,6 @@ import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 
-import jade.core.Profile;
-import jade.core.ProfileImpl;
-import jade.core.Runtime;
-import jade.wrapper.AgentController;
-import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 
 public class Main {

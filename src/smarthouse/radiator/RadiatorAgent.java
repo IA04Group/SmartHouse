@@ -18,7 +18,7 @@ public class RadiatorAgent extends Agent{
 		//récupérer la position de l'agent passé en argument à la création de l'agent (voir smarthouse/Main.java)
 		Object[] tab = getArguments();
 		place = (String)tab[0];
-		id = (int)tab[1];
+		id = (Integer)tab[1];
 		
 		//Enregistrement de l'agent GUI
 		DFAgentDescription dfd = new DFAgentDescription();
