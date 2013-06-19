@@ -18,7 +18,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 
 	@Override
 	public void action() {
-		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);		
+		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);	
 		ACLMessage message = myAgent.receive(template);
 		System.out.println("ACTION from requestBHV");
 		

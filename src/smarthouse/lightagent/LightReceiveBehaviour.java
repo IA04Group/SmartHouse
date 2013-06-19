@@ -1,5 +1,8 @@
 package smarthouse.lightagent;
 
+import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+
 import Data.Constants;
 import Data.MessageContent;
 
@@ -51,8 +54,12 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 			 answer = new ACLMessage(ACLMessage.INFORM);
 		}
 
+		ArrayList<String> c = new ArrayList<String>();
+		c.add(Constants.LIGHT);
+		c.add("" + ((LightAgent)myAgent).getPosition());
 		MessageContent answerContent = new MessageContent(content.getValue(), 
-							Constants.LIGHT_AGENT, ((LightAgent)myAgent).getPlace());
+							Constants.LIGHT_AGENT, ((LightAgent)myAgent).getPlace(), c
+							);
 		
 		String res = answerContent.toJSON();
 		
