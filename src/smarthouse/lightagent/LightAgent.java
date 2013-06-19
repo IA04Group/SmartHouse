@@ -53,7 +53,6 @@ public class LightAgent extends Agent {
 		DFAgentDescription[] result = null;
 		try {
 			result = DFService.search(this, template);
-	        System.out.println(result.length + " results" );
 			if(result.length > 0) {
 				autoSwitch = result[0].getName();
 				message.addReceiver(autoSwitch);

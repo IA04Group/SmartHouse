@@ -13,7 +13,6 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 
 	@Override
 	public void action() {
-		System.out.println("ON DEMARRE");
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.SUBSCRIBE);		
 		ACLMessage message = myAgent.receive(template);
 		

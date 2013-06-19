@@ -18,9 +18,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 
 	@Override
 	public void action() {
-		System.out.println("ACTION from requestBHV");
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);		
 		ACLMessage message = myAgent.receive(template);
+		System.out.println("ACTION from requestBHV");
 		
 		if (message != null) {
 			MessageContent d = new MessageContent(message);
@@ -207,6 +207,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	private boolean isDay(MessageContent content) {		
 		String value = content.getContent().get(0);
 		int v = Integer.parseInt(value);
+		System.out.println("Le detecteur renvoi : " + v);
 		
 		if(v < 500)
 			return false;
