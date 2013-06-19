@@ -119,7 +119,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 	@Override
 	public void action() {
 		
-		System.out.println(inputLine);
+		//System.out.println(inputLine);
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);		
 		ACLMessage message = myAgent.receive(template);
 			
@@ -141,10 +141,10 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 		Double value = Double.parseDouble("569");//inputLine
 		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
 		System.out.println("FUCK");
-		MessageContent messageContent = new MessageContent(value, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_OUTDOOR);
+		MessageContent messageContent = new MessageContent(value, Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_OUTDOOR, "toto");
 		System.out.println(messageContent);
 		String json = messageContent.toJSON();
-		DFAgentDescription template = new DFAgentDescription();
+		/*DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
         sd.setType(Constants.AUTO_SWITCH);
         sd.setName(Constants.AUTO_SWITCH_AGENT);
@@ -165,7 +165,13 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
         } catch(FIPAException fe) {
                 fe.printStackTrace();
         }
-		return message;
+        */
+		ACLMessage reply = message.createReply();
+		reply.setPerformative(ACLMessage.INFORM);
+		reply.setContent(json);
+
+		
+		return reply;
 	}
 	
 		

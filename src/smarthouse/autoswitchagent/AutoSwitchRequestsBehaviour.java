@@ -57,8 +57,10 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			
 			if(isDay) {
 				sendBadSimRequest("Il fait deja jour");
-				return;
-			}
+				//return;
+			}else{
+				
+			
 			// light processing
 			
 			LightData ld = null;
@@ -115,7 +117,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendBadRequest(message.getSender(), "Lumière introuvable");
 				}
 			}
-			
+			}
 		}else{
 			block();
 		}
@@ -145,7 +147,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				sender = result[0].getName();
 				answer.addReceiver(sender);
 				answer.setContent(res);
-				myAgent.send(answer);
+				//myAgent.send(answer);
 			}
 		} catch (FIPAException e) {
 			e.printStackTrace();
