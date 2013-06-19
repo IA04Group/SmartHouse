@@ -39,6 +39,5 @@ public class SimulationAgent extends GuiAgent {
 	}
 
 	protected void onGuiEvent(GuiEvent event) {
-		//addBehaviour(new SendMessageBehaviour((String) event.getParameter(0)));
 	}
 }

@@ -7,6 +7,7 @@ public class Constants {
 	 */
 	public static final int NBR_MAX_LIGHTS = 3;
 
+
 	/*
 	 * agents
 	 */
@@ -36,7 +37,6 @@ public class Constants {
 	public static final String SHUTTER = "shutter";
 	public static final String HEATER = "heater";
 	public static final String LIGHT = "light";
-	
 	
 	
 	/*

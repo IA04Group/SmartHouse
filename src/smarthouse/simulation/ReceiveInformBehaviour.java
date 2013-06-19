@@ -37,14 +37,11 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 		String s = json.getType();
 		if(s.equals(Constants.LIGHT)) {
 			room.setLight(id, json.getValue() > 0);
-		}
-		else if(s.equals(Constants.SHUTTER)) {
+		} else if(s.equals(Constants.SHUTTER)) {
 			room.setShutter(id, json.getValue() > 0);
-		}
-		else if(s.equals(Constants.HEATER)) {
+		} else if(s.equals(Constants.HEATER)) {
 			room.setHeater(id, json.getValue() > 0);
-		}
-		else if(s.equals(Constants.WINDOW)) {
+		} else if(s.equals(Constants.WINDOW)) {
 			room.setWindow(id, json.getValue() > 0);
 		}
 	}

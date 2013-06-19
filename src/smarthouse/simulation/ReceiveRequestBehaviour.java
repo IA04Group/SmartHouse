@@ -45,33 +45,26 @@ public class ReceiveRequestBehaviour extends CyclicBehaviour {
 		String s = json.getContent().get(0);
 		if(s.equals("day")) {
 			value = ((SimulationAgent) myAgent).getWindow().isDay() ? 1 : 0;
-		}
-		else if(s.equals("temperature")) {
+		} else if(s.equals("temperature")) {
 			value = room.getTemperature();
-		}
-		else if(s.equals(Constants.LIGHT)) {
+		} else if(s.equals(Constants.LIGHT)) {
 			value = room.getLightLevel();
-		}
-		else if(s.equals("time")) {
+		} else if(s.equals("time")) {
 			int[] datetime = ((SimulationAgent) myAgent).getWindow().getTime();
 			content.add(String.valueOf(datetime[0]));
 			content.add(String.valueOf(datetime[1]));
 			content.add(String.valueOf(datetime[1]));
-		}
-		else if(s.equals("isOn") || s.equals("isOpen")) {
+		} else if(s.equals("isOn") || s.equals("isOpen")) {
 			int id = Integer.parseInt(json.getContent().get(1));
 			content.add(String.valueOf(id));
 			String tmp = json.getType();
 			if(tmp.equals(Constants.LIGHT)) {
 				value = room.getLightStatus(id);
-			}
-			else if(tmp.equals(Constants.SHUTTER)) {
+			} else if(tmp.equals(Constants.SHUTTER)) {
 				value = room.getShutterStatus(id);					
-			}
-			else if(tmp.equals(Constants.HEATER)) {
+			} else if(tmp.equals(Constants.HEATER)) {
 				value = room.getHeaterStatus(id);
-			}
-			else if(tmp.equals(Constants.WINDOW)) {
+			} else if(tmp.equals(Constants.WINDOW)) {
 				value = room.getWindowStatus(id);
 			}
 		}
