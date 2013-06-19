@@ -1,16 +1,8 @@
 package smarthouse.autoswitchagent;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Data.Constants;
 import Data.LightData;
 import Data.MessageContent;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -31,19 +23,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		ACLMessage message = myAgent.receive(template);
 		
 		if (message != null) {
-			ObjectMapper objectMapper = new ObjectMapper();
-			MessageContent d = null;
-			try {
-				d = objectMapper.readValue(message.getContent(), MessageContent.class);
-			} catch (JsonParseException e1) {
-				e1.printStackTrace();
-			} catch (JsonMappingException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			MessageContent d = new MessageContent(message);
+
 			
-			// TODO switch sur les differents request possibles
 			/*
 			 * algo:
 			 *  - which room
@@ -78,7 +60,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			
 			
 			if(isDay) {
-				sendBadRequest(message.getSender(), "Il fait deja jour");
+				sendBadSimRequest("Il fait deja jour");
 				return;
 			}
 			// light processing
@@ -143,6 +125,37 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		}
 	}
 	
+	private void sendBadSimRequest(String string) {
+		ACLMessage answer = new ACLMessage(ACLMessage.INFORM);
+		
+		// parsing
+		MessageContent content = new MessageContent(0, Constants.AUTO_SWITCH_AGENT, "", string);
+		
+
+		String res = content.toJSON();
+		
+		//retrieve sender
+		AID sender = null;
+		
+		DFAgentDescription template = new DFAgentDescription();
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType(Constants.SIMULATION);
+		template.addServices(sd);
+		
+		DFAgentDescription[] result = null;
+		try {
+			result = DFService.search(myAgent, template);
+			if(result.length > 0) {
+				sender = result[0].getName();
+				answer.addReceiver(sender);
+				answer.setContent(res);
+				myAgent.send(answer);
+			}
+		} catch (FIPAException e) {
+			e.printStackTrace();
+		}		
+	}
+
 	/*
 	 * ask LightDetector if there is already light
 	 */
@@ -172,21 +185,8 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	 */
 	public void sendLightRequest(AID lightId, int order, AID sender) {
 		MessageContent d = new MessageContent(order, Constants.AUTO_SWITCH, "");
+				String answer = d.toJSON();
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		String answer;
-		String aid;
-		ArrayList<String> c = new ArrayList<String>();
-		
-		try {
-			aid = objectMapper.writeValueAsString(sender);
-			c.set(0,aid);
-			d.setContent(c);
-			answer = objectMapper.writeValueAsString(d);
-		} catch (JsonProcessingException e) {
-			answer = "";
-			e.printStackTrace();
-		}
 		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
 		msg.setContent(answer);
 		msg.addReceiver(lightId);
@@ -200,16 +200,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	public void sendBadRequest(AID sender, String message) {
 		MessageContent d = new MessageContent(0, Constants.AUTO_SWITCH, message);
 		
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		String answer;
-		
-		try {
-			answer = objectMapper.writeValueAsString(d);
-		} catch (JsonProcessingException e) {
-			answer = "";
-			e.printStackTrace();
-		}
+		String answer = d.toJSON();
 
 		ACLMessage msg = new ACLMessage(ACLMessage.FAILURE);
 		msg.setContent(answer);

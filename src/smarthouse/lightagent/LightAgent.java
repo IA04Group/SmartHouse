@@ -1,12 +1,5 @@
 package smarthouse.lightagent;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import Data.Constants;
 import Data.MessageContent;
 import smarthouse.autoswitchagent.AutoSwitchSubscribeBehaviour;
@@ -66,21 +59,14 @@ public class LightAgent extends Agent {
 				message.addReceiver(autoSwitch);
 				
 				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, this.place, "");
-				ObjectMapper objectMapper = new ObjectMapper();
 				
-				String answer = "";
-				try {
-					answer = objectMapper.writeValueAsString(d);
-					System.out.println("LIGHT on send : " + answer);
-					message.setContent(answer);
-					
-					send(message);
-				} catch (JsonProcessingException e) {
-					e.printStackTrace();
-				}
+				String answer = d.toJSON();
+				System.out.println("LIGHT on send : " + answer);
+				message.setContent(answer);	
+				send(message);
 			}
 			else {
-				System.out.println("et voilà une jolie boucle infinie pour " + this.getName());
+				System.out.println("voilà une jolie boucle infinie pour " + this.getName());
 				subscribeToSwitch();
 			}
 		} catch (FIPAException e) {
@@ -113,7 +99,7 @@ public class LightAgent extends Agent {
 	public boolean getLightState() {
 		return this.state;
 	}
-	
+	/*
 	public AID getAIDFromString(String sender) {
 		AID id = null;
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -128,6 +114,6 @@ public class LightAgent extends Agent {
 		}
 		
 		return id;
-	}
+	}*/
 
 }
