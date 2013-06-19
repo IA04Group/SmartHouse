@@ -11,6 +11,7 @@ public class LightSubscribeBehaviour extends Behaviour {
 	
 	@Override
 	public void action() {
+		System.out.println("SUBSCRIBE LIGHT");
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);		
 		ACLMessage answer = myAgent.receive(template);
 		System.out.println("reception d'un accept");

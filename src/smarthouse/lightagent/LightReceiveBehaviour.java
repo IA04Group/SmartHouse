@@ -40,10 +40,10 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 		ACLMessage answer;
 		// parsing
 		MessageContent content = new MessageContent(message);
-		
+		System.out.println("on est dans le light receiver behaviour");
 
 		// test valeur
-		if( ( ((LightAgent)myAgent).getLightState() &&  content.getValue()==1) 
+		/*if( ( ((LightAgent)myAgent).getLightState() &&  content.getValue()==1) 
 				|| ( !((LightAgent)myAgent).getLightState() &&  content.getValue()==0)) {
 			// already done
 			answer = new ACLMessage(ACLMessage.FAILURE);
@@ -52,8 +52,8 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 			//state change
 			 ((LightAgent)myAgent).changeState();
 			 answer = new ACLMessage(ACLMessage.INFORM);
-		}
-
+		}*/
+		answer = new ACLMessage(ACLMessage.INFORM); //uncomment
 		ArrayList<String> c = new ArrayList<String>();
 		c.add(Constants.LIGHT);
 		c.add("" + ((LightAgent)myAgent).getPosition());

@@ -32,10 +32,12 @@ public class LightAgent extends Agent {
 		SequentialBehaviour seqbhv = new SequentialBehaviour();
 		
 		// register to autoswitch
-		seqbhv.addSubBehaviour(new AutoSwitchSubscribeBehaviour());
+		seqbhv.addSubBehaviour(new LightSubscribeBehaviour());
 				
 		//this.addBehaviour(seqbhv);
 		seqbhv.addSubBehaviour(new LightReceiveBehaviour());
+		
+		this.addBehaviour(seqbhv);
 		
 		// and there we're starting
 		this.subscribeToSwitch();
