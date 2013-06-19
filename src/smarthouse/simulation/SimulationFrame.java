@@ -41,6 +41,10 @@ public class SimulationFrame extends JFrame {
 	private JTextArea logs;
 	private JSlider livingroomTempSlider;
 	private JLabel livingroomTempThreshold;
+	private JSlider kitchenTempSlider;
+	private JLabel kitchenTempThreshold;
+	private JSlider bedroomTempSlider;
+	private JLabel bedroomTempThreshold;
 	private boolean running = false;
 
 	public SimulationFrame(SimulationAgent agent) {
@@ -136,7 +140,7 @@ public class SimulationFrame extends JFrame {
 		livingroom.addThermometer(livingroomTemp);
 
 		livingroomTempSlider = new JSlider(JSlider.HORIZONTAL, 10, 30, 18);
-		livingroomTempSlider.setSize(120, 20);
+		livingroomTempSlider.setSize(115, 20);
 		livingroomTempSlider.setLocation(15, 40);
 		livingroomPanel.add(livingroomTempSlider);
 
@@ -147,29 +151,51 @@ public class SimulationFrame extends JFrame {
 
 		/* Kitchen UI */
 		JPanel kitchenPanel = new JPanel();
+		kitchenPanel.setLayout(null);
 		kitchenPanel.setBorder(BorderFactory.createTitledBorder("Kitchen"));
 		kitchenPanel.setSize(145, 70);
 		kitchenPanel.setLocation(345, 495);
 		getContentPane().add(kitchenPanel);
 
 		JLabel kitchenTemp = new JLabel("18.0°C");
-		kitchenTemp.setSize(20, 20);
-		kitchenTemp.setLocation(0, 0);
+		kitchenTemp.setSize(50, 20);
+		kitchenTemp.setLocation(20, 15);
 		kitchenPanel.add(kitchenTemp);
 		kitchen.addThermometer(kitchenTemp);
 
+		kitchenTempSlider = new JSlider(JSlider.HORIZONTAL, 10, 30, 18);
+		kitchenTempSlider.setSize(115, 20);
+		kitchenTempSlider.setLocation(15, 40);
+		kitchenPanel.add(kitchenTempSlider);
+
+		kitchenTempThreshold = new JLabel("18.0°C");
+		kitchenTempThreshold.setSize(50, 20);
+		kitchenTempThreshold.setLocation(80, 15);
+		kitchenPanel.add(kitchenTempThreshold);
+
 		/* Bedroom UI */
 		JPanel bedroomPanel = new JPanel();
+		bedroomPanel.setLayout(null);
 		bedroomPanel.setBorder(BorderFactory.createTitledBorder("Bedroom"));
 		bedroomPanel.setSize(145, 70);
 		bedroomPanel.setLocation(500, 495);
 		getContentPane().add(bedroomPanel);
 
 		JLabel bedroomTemp = new JLabel("18.0°C");
-		bedroomTemp.setSize(20, 20);
-		bedroomTemp.setLocation(0, 0);
+		bedroomTemp.setSize(50, 20);
+		bedroomTemp.setLocation(20, 15);
 		bedroomPanel.add(bedroomTemp);
 		bedroom.addThermometer(bedroomTemp);
+
+		bedroomTempSlider = new JSlider(JSlider.HORIZONTAL, 10, 30, 18);
+		bedroomTempSlider.setSize(115, 20);
+		bedroomTempSlider.setLocation(15, 40);
+		bedroomPanel.add(bedroomTempSlider);
+
+		bedroomTempThreshold = new JLabel("18.0°C");
+		bedroomTempThreshold.setSize(50, 20);
+		bedroomTempThreshold.setLocation(80, 15);
+		bedroomPanel.add(bedroomTempThreshold);
 
 		/* Logs */
 		logs = new JTextArea();
@@ -240,6 +266,22 @@ public class SimulationFrame extends JFrame {
 			      double threshold = livingroomTempSlider.getValue();
 			      rooms.get("livingroom").setTempThreshold(threshold);
 			      livingroomTempThreshold.setText(String.format("%.1f°C", threshold));
+			}
+		  });
+
+		kitchenTempSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+			      double threshold = kitchenTempSlider.getValue();
+			      rooms.get("kitchen").setTempThreshold(threshold);
+			      kitchenTempThreshold.setText(String.format("%.1f°C", threshold));
+			}
+		  });
+
+		bedroomTempSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+			      double threshold = bedroomTempSlider.getValue();
+			      rooms.get("bedroom").setTempThreshold(threshold);
+			      bedroomTempThreshold.setText(String.format("%.1f°C", threshold));
 			}
 		  });
 
