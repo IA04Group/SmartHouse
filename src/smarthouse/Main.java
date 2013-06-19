@@ -26,9 +26,9 @@ public class Main {
 
 		// Create a new agent
 		// and pass it a reference to an Object
-		AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
+		// AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
 		// Fire up the agent
-		lightSensorAgent.start();
+		// lightSensorAgent.start();
 		
 		// Create a new agent
 		// and pass it a reference to an Object
@@ -38,16 +38,16 @@ public class Main {
 		
 		// Create a new agent
 		// and pass it a reference to an Object
-		AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
+		//AgentController remoteControlAgent = cc.createNewAgent("remoteControlAgent","smarthouse.RemoteControlAgent.RemoteControlAgent", null);
 		// Fire up the agent
-		remoteControlAgent.start();
+		//remoteControlAgent.start();
 		
 		/*
 		 * NICO's stuff
 		 * 
 		 */
 		// agents autoswitch and lights
-		AgentController autoSwitchAgent = cc.createNewAgent("autoSwitchAgent",
+		/*AgentController autoSwitchAgent = cc.createNewAgent("autoSwitchAgent",
 				"smarthouse.autoswitchagent.AutoSwitchAgent", null);
 		// Fire up the agent
 		autoSwitchAgent.start();
@@ -70,7 +70,7 @@ public class Main {
 		AgentController light3Agent = cc.createNewAgent("lightAgent3",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
-		light3Agent.start();
+		light3Agent.start();*/
 		
 		/*
 		 * 
@@ -78,12 +78,28 @@ public class Main {
 		 */
 		
 		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
-		// Fire up the agent
+		// Fire up the agens
 		simulation.start();
-
-		AgentController planning = cc.createNewAgent("planning","smarthouse.planning.PlanningAgent", null);
+		
+		AgentController therm = cc.createNewAgent(Constants.THERMOMETER_AGENT,"smarthouse.therm.ThermometerAgent", new Object[]{Constants.PLACE_LIVINGROOM});
 		// Fire up the agent
-		planning.start();
+		therm.start();
+		
+		AgentController win = cc.createNewAgent("Window 1","smarthouse.window.WindowAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
+		// Fire up the agent
+		win.start();
+		
+		win = cc.createNewAgent("Window 2","smarthouse.window.WindowAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
+		// Fire up the agent
+		win.start();
+		
+		AgentController rad = cc.createNewAgent("Heater 1","smarthouse.heater.HeaterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
+		// Fire up the agent
+		rad.start();
+		
+		rad = cc.createNewAgent("Heater 2","smarthouse.heater.HeaterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
+		// Fire up the agent
+		rad.start();
 		
 		/*
 

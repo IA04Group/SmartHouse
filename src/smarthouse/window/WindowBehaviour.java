@@ -3,8 +3,10 @@ package smarthouse.window;
 import java.io.IOException;
 import java.util.Map;
 
-import smarthouse.therm.ThermAgent;
+import smarthouse.heater.HeaterAgent;
+import smarthouse.therm.ThermometerAgent;
 
+import Data.Constants;
 import Data.MessageContent;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -51,13 +53,13 @@ public class WindowBehaviour extends CyclicBehaviour{
 	
 	void changeState(ACLMessage msg){
 		MessageContent ct = new MessageContent(msg);	
+		System.out.println("\n" + myAgent.getLocalName() + ": state: " + ((WindowAgent)myAgent).state + " => " + ct.getValue());
 		((WindowAgent)myAgent).state = (ct.getValue() != 0);
 		
-		//Envoi un message de changement d'état à l'agent GUI
+		//Envoi un message de changement d'ï¿½tat ï¿½ l'agent GUI
 		ACLMessage chSt = new ACLMessage(ACLMessage.INFORM);
 		
-//Mettre les caractéristiques de l'agent GUI
-		chSt.addReceiver((AID)getReceiver("", "").get(0));
+		chSt.addReceiver((AID)getReceiver(Constants.SIMULATION, Constants.SIMULATION_AGENT).get(0));
 		chSt.setContent(getMsgContent().toJSON());
 		
 		myAgent.send(chSt);
@@ -65,12 +67,16 @@ public class WindowBehaviour extends CyclicBehaviour{
 	
 	void sendState(ACLMessage msg){
 		ACLMessage st = msg.createReply();
+		st.setPerformative(ACLMessage.INFORM);
 		st.setContent(getMsgContent().toJSON());
+		
+		System.out.println(myAgent.getLocalName() + ": reply to " + msg.getSender().getLocalName() + "\n\t with: " + st.getContent());
+		
 		myAgent.send(st);
 	}
 	
 	MessageContent getMsgContent(){
-		return new MessageContent((((WindowAgent)myAgent).state) ? 1.0 : 0.0, "Window", ((WindowAgent)myAgent).place);
+		return new MessageContent((((WindowAgent)myAgent).state) ? 1.0 : 0.0, Constants.WINDOW, ((WindowAgent)myAgent).place,"" + ((WindowAgent)myAgent).id);
 	}
 	
 	public List getReceiver(String type, String name) {

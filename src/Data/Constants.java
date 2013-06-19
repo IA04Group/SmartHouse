@@ -36,6 +36,8 @@ public class Constants {
 	public static final String SIMULATION = "Simulation";
 	public static final String PLANNING_AGENT = "PlanningAgent";
 	public static final String PLANNING = "planning";
+	public static final String THERMOMETER_AGENT = "ThermometerAgent";
+	public static final String THERMOMETER = "Thermometer";
 	
 	
 	/* 
@@ -88,6 +90,7 @@ public class Constants {
 	/*
 	 * Time
 	 */
+	public static int THERMOMETER_TIMER = 100;
 	public static final String[] dayOfWeek = {
 		"Monday",
 		"Tuesday",
