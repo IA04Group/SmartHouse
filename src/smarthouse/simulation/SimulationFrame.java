@@ -213,7 +213,9 @@ public class SimulationFrame extends JFrame {
 			public void mouseReleased(MouseEvent e) {
 				timer.stop();
 				timer.setDelay(1000);
-				timer.start();
+				if (running) {
+					timer.start();
+				}
 			}
 		});
 
