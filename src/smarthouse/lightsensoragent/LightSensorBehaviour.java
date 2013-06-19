@@ -20,6 +20,7 @@ import jade.lang.acl.MessageTemplate;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import Data.Constants;
@@ -137,8 +138,12 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 
 	
 	private ACLMessage parse(ACLMessage message){
+		ArrayList<String> al  = new ArrayList<String>();
+		al.add("569");//inputLine
 		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
-		MessageContent messageContent = new MessageContent(0, Constants.LIGHT_AGENT, Constants.PLACE_OUTDOOR, "569"/*inputLine*/);
+		System.out.println("FUCK");
+		MessageContent messageContent = new MessageContent(Constants.LIGHT_SENSOR_AGENT, Constants.PLACE_OUTDOOR, al);
+		System.out.println(messageContent);
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();

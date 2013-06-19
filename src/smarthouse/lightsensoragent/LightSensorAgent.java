@@ -19,7 +19,7 @@ public class LightSensorAgent extends Agent {
 		DFAgentDescription dfd = new  DFAgentDescription();
 		dfd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType(Constants.LIGHT_AGENT);
+		sd.setType(Constants.LIGHT_SENSOR);
 		sd.setName(Constants.LIGHT_SENSOR_AGENT);
 		dfd.addServices(sd);
 		try {

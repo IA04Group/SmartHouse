@@ -206,7 +206,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	
 	
 	private boolean isDay(MessageContent content) {		
-		try {
+		/*try {*/
 			String value = content.getContent().get(0);
 			int v = Integer.parseInt(value);
 			System.out.println("Le detecteur renvoi : " + v);
@@ -215,10 +215,10 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				return false;
 			else
 				return true;
-		}
+		/*}
 		catch(IndexOutOfBoundsException ioobe) {
 			System.out.println("On aurait JAMAIS du etre la :)");
 			return false;
-		}
+		}*/
 	}
 }

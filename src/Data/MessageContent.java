@@ -77,6 +77,7 @@ public class MessageContent {
 	}
 	
 	public MessageContent(ACLMessage msg){
+		System.out.println("ON Y ESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jrootNode = null;
 		
@@ -93,11 +94,14 @@ public class MessageContent {
 		this.value = jrootNode.path("value").asDouble();
 		this.type = jrootNode.path("type").asText();
 		this.place = jrootNode.path("place").asText();
+		System.out.println("content : " + jrootNode.path("content"));
 		if(jrootNode.path("content").isArray()){
 			for (int i = 0; i < jrootNode.path("content").size(); i++) {
 				this.content.add(jrootNode.path("content").path(i).asText());
+				System.out.println(jrootNode.path("content").path(i).asText());
 		    }
 		}
+		
 	}
 	
 	public double getValue() {
