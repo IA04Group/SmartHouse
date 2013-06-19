@@ -18,10 +18,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Data.Constants;
 
@@ -36,6 +39,8 @@ public class SimulationFrame extends JFrame {
 	private JTextField time;
 	private JLabel day;
 	private JTextArea logs;
+	private JSlider livingroomTempSlider;
+	private JLabel livingroomTempThreshold;
 	private boolean running = false;
 
 	public SimulationFrame(SimulationAgent agent) {
@@ -118,16 +123,27 @@ public class SimulationFrame extends JFrame {
 
 		/* Living room UI */
 		JPanel livingroomPanel = new JPanel();
+		livingroomPanel.setLayout(null);
 		livingroomPanel.setBorder(BorderFactory.createTitledBorder("Living room"));
 		livingroomPanel.setSize(145, 70);
 		livingroomPanel.setLocation(190, 495);
 		getContentPane().add(livingroomPanel);
 
 		JLabel livingroomTemp = new JLabel("18.0°C");
-		livingroomTemp.setSize(20, 20);
-		livingroomTemp.setLocation(0, 0);
+		livingroomTemp.setSize(50, 20);
+		livingroomTemp.setLocation(20, 15);
 		livingroomPanel.add(livingroomTemp);
 		livingroom.addThermometer(livingroomTemp);
+
+		livingroomTempSlider = new JSlider(JSlider.HORIZONTAL, 10, 30, 18);
+		livingroomTempSlider.setSize(120, 20);
+		livingroomTempSlider.setLocation(15, 40);
+		livingroomPanel.add(livingroomTempSlider);
+
+		livingroomTempThreshold = new JLabel("18.0°C");
+		livingroomTempThreshold.setSize(50, 20);
+		livingroomTempThreshold.setLocation(80, 15);
+		livingroomPanel.add(livingroomTempThreshold);
 
 		/* Kitchen UI */
 		JPanel kitchenPanel = new JPanel();
@@ -218,6 +234,14 @@ public class SimulationFrame extends JFrame {
 				}
 			}
 		});
+
+		livingroomTempSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+			      double threshold = livingroomTempSlider.getValue();
+			      rooms.get("livingroom").setTempThreshold(threshold);
+			      livingroomTempThreshold.setText(String.format("%.1f°C", threshold));
+			}
+		  });
 
 		/* Start the simulation */
 		setVisible(true);

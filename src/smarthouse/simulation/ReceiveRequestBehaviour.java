@@ -47,6 +47,7 @@ public class ReceiveRequestBehaviour extends CyclicBehaviour {
 			value = ((SimulationAgent) myAgent).getWindow().isDay() ? 1 : 0;
 		} else if(s.equals("temperature")) {
 			value = room.getTemperature();
+			content.add(String.valueOf(room.getTempThreshold()));
 		} else if(s.equals(Constants.LIGHT)) {
 			value = room.getLightLevel();
 		} else if(s.equals("time")) {

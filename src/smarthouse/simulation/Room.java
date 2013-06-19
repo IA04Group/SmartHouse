@@ -20,6 +20,7 @@ public class Room extends JComponent {
 	private double temp = 18;
 	private double outTemp = 10;
 	private double tempPerMin = 0;
+	private double tempThreshold = 18;
 
 	public Room(int width, int height, Color color) {
 		super();
@@ -224,5 +225,13 @@ public class Room extends JComponent {
 			return 0;
 		}
 		return windows.get(id).isOpen() ? 1 : 0;
+	}
+
+	public void setTempThreshold(double threshold) {
+		tempThreshold = threshold;
+	}
+
+	public double getTempThreshold() {
+		return tempThreshold;
 	}
 }
