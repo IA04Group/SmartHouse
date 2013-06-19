@@ -38,7 +38,7 @@ public class ReceiveRequestBehaviour extends CyclicBehaviour {
 		Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
 		MessageContent replyJson = new MessageContent();
 		replyJson.setPlace(json.getPlace());
-		replyJson.setType(json.getType());
+		replyJson.setType(Constants.SIMULATION);
 		double value = 0;
 		ArrayList<String> content = new ArrayList<String>();
 		content.add(json.getContent().get(0));
