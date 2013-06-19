@@ -151,7 +151,7 @@ public class SimulationFrame extends JFrame {
 		livingroomTempSlider.setLocation(15, 40);
 		livingroomPanel.add(livingroomTempSlider);
 
-		livingroomTempThreshold = new JLabel("18.0°C");
+		livingroomTempThreshold = new JLabel(startTemp);
 		livingroomTempThreshold.setSize(50, 20);
 		livingroomTempThreshold.setLocation(80, 15);
 		livingroomPanel.add(livingroomTempThreshold);
@@ -175,7 +175,7 @@ public class SimulationFrame extends JFrame {
 		kitchenTempSlider.setLocation(15, 40);
 		kitchenPanel.add(kitchenTempSlider);
 
-		kitchenTempThreshold = new JLabel("18.0°C");
+		kitchenTempThreshold = new JLabel(startTemp);
 		kitchenTempThreshold.setSize(50, 20);
 		kitchenTempThreshold.setLocation(80, 15);
 		kitchenPanel.add(kitchenTempThreshold);
@@ -199,7 +199,7 @@ public class SimulationFrame extends JFrame {
 		bedroomTempSlider.setLocation(15, 40);
 		bedroomPanel.add(bedroomTempSlider);
 
-		bedroomTempThreshold = new JLabel("18.0°C");
+		bedroomTempThreshold = new JLabel(startTemp);
 		bedroomTempThreshold.setSize(50, 20);
 		bedroomTempThreshold.setLocation(80, 15);
 		bedroomPanel.add(bedroomTempThreshold);
