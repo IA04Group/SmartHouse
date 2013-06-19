@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -54,6 +55,12 @@ public class SimulationFrame extends JFrame {
 		myAgent = agent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		String startTemp = null;
+		try {
+			startTemp = new String(String.format("%.1f°C", Constants.INITIAL_TEMP).getBytes(), "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			startTemp = String.format("%.1f C", Constants.INITIAL_TEMP);
+		}
 
 		/* Cached Images */
 		cachedIcons.put("play", new ImageIcon("icons/play.png"));
@@ -133,7 +140,7 @@ public class SimulationFrame extends JFrame {
 		livingroomPanel.setLocation(190, 495);
 		getContentPane().add(livingroomPanel);
 
-		JLabel livingroomTemp = new JLabel("18.0°C");
+		JLabel livingroomTemp = new JLabel(startTemp);
 		livingroomTemp.setSize(50, 20);
 		livingroomTemp.setLocation(20, 15);
 		livingroomPanel.add(livingroomTemp);
@@ -157,7 +164,7 @@ public class SimulationFrame extends JFrame {
 		kitchenPanel.setLocation(345, 495);
 		getContentPane().add(kitchenPanel);
 
-		JLabel kitchenTemp = new JLabel("18.0°C");
+		JLabel kitchenTemp = new JLabel(startTemp);
 		kitchenTemp.setSize(50, 20);
 		kitchenTemp.setLocation(20, 15);
 		kitchenPanel.add(kitchenTemp);
@@ -181,7 +188,7 @@ public class SimulationFrame extends JFrame {
 		bedroomPanel.setLocation(500, 495);
 		getContentPane().add(bedroomPanel);
 
-		JLabel bedroomTemp = new JLabel("18.0°C");
+		JLabel bedroomTemp = new JLabel(startTemp);
 		bedroomTemp.setSize(50, 20);
 		bedroomTemp.setLocation(20, 15);
 		bedroomPanel.add(bedroomTemp);
@@ -263,27 +270,39 @@ public class SimulationFrame extends JFrame {
 
 		livingroomTempSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-			      double threshold = livingroomTempSlider.getValue();
-			      rooms.get("livingroom").setTempThreshold(threshold);
-			      livingroomTempThreshold.setText(String.format("%.1f°C", threshold));
+				double threshold = livingroomTempSlider.getValue();
+				rooms.get("livingroom").setTempThreshold(threshold);
+				try {
+					livingroomTempThreshold.setText(new String(String.format("%.1f°C", threshold).getBytes(), "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					livingroomTempThreshold.setText(String.format("%.1f C", threshold));
+				}
 			}
-		  });
+		});
 
 		kitchenTempSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-			      double threshold = kitchenTempSlider.getValue();
-			      rooms.get("kitchen").setTempThreshold(threshold);
-			      kitchenTempThreshold.setText(String.format("%.1f°C", threshold));
+				double threshold = kitchenTempSlider.getValue();
+				rooms.get("kitchen").setTempThreshold(threshold);
+				try {
+					kitchenTempThreshold.setText(new String(String.format("%.1f°C", threshold).getBytes(), "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					kitchenTempThreshold.setText(String.format("%.1f C", threshold));
+				}
 			}
-		  });
+		});
 
 		bedroomTempSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-			      double threshold = bedroomTempSlider.getValue();
-			      rooms.get("bedroom").setTempThreshold(threshold);
-			      bedroomTempThreshold.setText(String.format("%.1f°C", threshold));
+				double threshold = bedroomTempSlider.getValue();
+				rooms.get("bedroom").setTempThreshold(threshold);
+				try {
+					bedroomTempThreshold.setText(new String(String.format("%.1f°C", threshold).getBytes(), "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					bedroomTempThreshold.setText(String.format("%.1f C", threshold));
+				}
 			}
-		  });
+		});
 
 		/* Start the simulation */
 		setVisible(true);

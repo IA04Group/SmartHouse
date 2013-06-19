@@ -2,6 +2,7 @@ package smarthouse.simulation;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Room extends JComponent {
 	private double lightlevel = 0;
 	private boolean dayTime = false;
 	private JLabel thermometer = null;
-	private double temp = 18;
+	private double temp = Constants.INITIAL_TEMP;
 	private double outTemp = 10;
 	private double tempPerMin = 0;
 	private double tempThreshold = 18;
@@ -46,7 +47,11 @@ public class Room extends JComponent {
 		recalculateTempPerMin();
 		temp += tempPerMin;
 		if (thermometer != null) {
-			thermometer.setText(String.format("%.1f°C", temp));
+			try {
+				thermometer.setText(new String(String.format("%.1f°C", temp).getBytes(), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				thermometer.setText(String.format("%.1f C", temp));
+			}
 		}
 	}
 
