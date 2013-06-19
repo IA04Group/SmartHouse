@@ -11,8 +11,10 @@ public class Constants {
 	public static final double TEMPERATURE_TRANSFER_RATE = 0.02;
 	public static final double TEMPRATE_THRESHOLD = 37.5;
 	public static final double DISMINUSHING_TEMPRATE = 0.02;
+	public static final double INITIAL_TEMP = 18;
 	public static final double NIGHT_OUTDOOR_TEMPERATURE = 10;
 	public static final double DAY_OUTDOOR_TEMPERATURE = 25;
+
 
 	/*
 	 * Number of lights that can subscribe on AutoSwitch
