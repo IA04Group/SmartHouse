@@ -24,7 +24,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		
 		if (message != null) {
 			MessageContent d = new MessageContent(message);
-
+			System.out.println("message etait pas nul");
 			
 			/*
 			 * algo:
@@ -47,8 +47,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				return;
 			}
 			
-			
+			System.out.println("On a recu un truc");
 			if(d.getType().equals(Constants.LIGHT_SENSOR_AGENT)) {
+				System.out.println("Et la c'est bien light sensor agent");
 				isDay = this.isDay(d);
 			}
 			
