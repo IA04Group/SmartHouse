@@ -43,6 +43,7 @@ public class SimulationFrame extends JFrame {
 	public SimulationFrame(SimulationAgent agent) {
 		super();
 		setSize(1024, 600);
+		setTitle("Smarthouse");
 		myAgent = agent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
