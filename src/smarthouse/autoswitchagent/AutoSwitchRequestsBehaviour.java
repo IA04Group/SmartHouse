@@ -49,12 +49,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			
 			
 			if(d.getType().equals(Constants.LIGHT_SENSOR_AGENT)) {
-				if(d.getValue() == 0) {
-					isDay = false;
-				}
-				else {
-					isDay = true;
-				}
+				isDay = this.isDay(d);
 			}
 			
 			
@@ -124,7 +119,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			block();
 		}
 	}
-	
+
 	private void sendBadSimRequest(String string) {
 		ACLMessage answer = new ACLMessage(ACLMessage.INFORM);
 		
@@ -206,5 +201,16 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		msg.setContent(answer);
 		msg.addReceiver(sender);
 		myAgent.send(msg);
+	}
+	
+	
+	private boolean isDay(MessageContent content) {		
+		String value = content.getContent().get(0);
+		int v = Integer.parseInt(value);
+		
+		if(v < 500)
+			return false;
+		else
+			return true;
 	}
 }
