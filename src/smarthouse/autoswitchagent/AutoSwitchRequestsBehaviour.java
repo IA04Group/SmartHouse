@@ -161,7 +161,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
-		sd.setType(Constants.LIGHT_SENSOR_AGENT);
+		sd.setType(Constants.LIGHT_SENSOR);
 		template.addServices(sd);
 		
 		DFAgentDescription[] result = null;
@@ -204,9 +204,10 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		myAgent.send(msg);
 	}
 	
-	
+
 	private boolean isDay(MessageContent content) {		
 		/*try {*/
+
 			String value = content.getContent().get(0);
 			int v = Integer.parseInt(value);
 			System.out.println("Le detecteur renvoi : " + v);
