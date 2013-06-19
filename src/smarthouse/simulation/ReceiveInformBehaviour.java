@@ -32,17 +32,22 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 			return;
 		}
 
-		Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
-		int id = Integer.parseInt(json.getContent().get(0));
-		String s = json.getType();
-		if(s.equals(Constants.LIGHT)) {
-			room.setLight(id, json.getValue() > 0);
-		} else if(s.equals(Constants.SHUTTER)) {
-			room.setShutter(id, json.getValue() > 0);
-		} else if(s.equals(Constants.HEATER)) {
-			room.setHeater(id, json.getValue() > 0);
-		} else if(s.equals(Constants.WINDOW)) {
-			room.setWindow(id, json.getValue() > 0);
+		String action = json.getContent().get(0);
+		if (action.equals(Constants.ACTION_LOG_APPEND)) {
+			((SimulationAgent) myAgent).getWindow().appendLog(json.getContent().get(1));
+		} else {
+			Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
+			int id = Integer.parseInt(action);
+			String s = json.getType();
+			if(s.equals(Constants.LIGHT)) {
+				room.setLight(id, json.getValue() > 0);
+			} else if(s.equals(Constants.SHUTTER)) {
+				room.setShutter(id, json.getValue() > 0);
+			} else if(s.equals(Constants.HEATER)) {
+				room.setHeater(id, json.getValue() > 0);
+			} else if(s.equals(Constants.WINDOW)) {
+				room.setWindow(id, json.getValue() > 0);
+			}
 		}
 	}
 }

@@ -15,7 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import Data.Constants;
@@ -32,11 +35,12 @@ public class SimulationFrame extends JFrame {
 	private Timer timer;
 	private JTextField time;
 	private JLabel day;
+	private JTextArea logs;
 	private boolean running = false;
 
 	public SimulationFrame(SimulationAgent agent) {
 		super();
-		setSize(660, 600);
+		setSize(1024, 600);
 		myAgent = agent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -150,6 +154,17 @@ public class SimulationFrame extends JFrame {
 		bedroomPanel.add(bedroomTemp);
 		bedroom.addThermometer(bedroomTemp);
 
+		/* Logs */
+		logs = new JTextArea();
+		logs.setEditable(false);
+		logs.setLineWrap(true);
+		logs.setWrapStyleWord(true);
+		JScrollPane scrollLog = new JScrollPane(logs);
+		scrollLog.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+		scrollLog.setSize(349, 547);
+		scrollLog.setLocation(660, 15);
+		getContentPane().add(scrollLog);
+
 		/* Timer */
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -248,9 +263,22 @@ public class SimulationFrame extends JFrame {
 	}
 
 	public void setDay(boolean day) {
+		if (day == dayTime) {
+			return;
+		}
+		if (day) {
+			appendLog("Sun is rising.");
+		} else {
+		    appendLog("Sun is setting.");
+		}
 		for (Room room : rooms.values()) {
 			room.setDay(day);
 		}
 		dayTime = day;
+	}
+
+	public synchronized void appendLog(String txt) {
+		String time = currentTime[0] + ":" + String.format("%02d", currentTime[1]);
+		logs.setText(logs.getText() + time + ": " + txt + "\n");
 	}
 }

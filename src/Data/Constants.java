@@ -54,4 +54,8 @@ public class Constants {
 	public static final String BUTTON_5_OFF = "3932160";
 	
 	
+	/*
+	 * ACTIONS
+	 */
+	public static final String ACTION_LOG_APPEND = "logAppend";
 }
