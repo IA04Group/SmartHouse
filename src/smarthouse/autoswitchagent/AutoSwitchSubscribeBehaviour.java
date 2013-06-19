@@ -21,7 +21,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 			ACLMessage reponse = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
 			
 			//retrieving the data
-			MessageContent content = new MessageContent(reponse);
+			MessageContent content = new MessageContent(message);
 			current_lights = ((AutoSwitchAgent) myAgent).subscribeNewLight(message.getSender(),
 						content.getPlace());
 			System.out.println("New light ! : " + message.getSender());
