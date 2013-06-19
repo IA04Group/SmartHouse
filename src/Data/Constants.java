@@ -14,6 +14,7 @@ public class Constants {
 	public static final String AUTO_SWITCH_AGENT = "AutoSwitchAgent";
 	public static final String AUTO_SWITCH = "AutoSwitch";
 	public static final String LIGHT_SENSOR_AGENT = "LightSensorAgent";
+	public static final String LIGHT_SENSOR = "LightSensor";
 	public static final String LIGHT_AGENT = "LightAgent";
 	public static final String SIMULATION_AGENT = "SimulationAgent";
 	public static final String SIMULATION = "Simulation";
@@ -79,4 +80,6 @@ public class Constants {
 		"Friday",
 		"Saturday",
 		"Sunday"};
+
+
 }
