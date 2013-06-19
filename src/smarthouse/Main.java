@@ -80,6 +80,10 @@ public class Main {
 		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		// Fire up the agent
 		simulation.start();
+
+		AgentController planning = cc.createNewAgent("planning","smarthouse.planning.PlanningAgent", null);
+		// Fire up the agent
+		planning.start();
 		
 		/*
 

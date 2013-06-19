@@ -17,6 +17,8 @@ public class Constants {
 	public static final String LIGHT_AGENT = "LightAgent";
 	public static final String SIMULATION_AGENT = "SimulationAgent";
 	public static final String SIMULATION = "Simulation";
+	public static final String PLANNING_AGENT = "PlanningAgent";
+	public static final String PLANNING = "planning";
 	
 	
 	/* 
@@ -58,4 +60,23 @@ public class Constants {
 	 * ACTIONS
 	 */
 	public static final String ACTION_LOG_APPEND = "logAppend";
+
+
+	/*
+	 * Gui Event
+	 */
+	public static final int GUI_EVENT_TIME = 0;
+
+
+	/*
+	 * Time
+	 */
+	public static final String[] dayOfWeek = {
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday"};
 }

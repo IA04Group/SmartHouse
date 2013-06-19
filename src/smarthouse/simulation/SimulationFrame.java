@@ -26,8 +26,6 @@ import javax.swing.Timer;
 import Data.Constants;
 
 public class SimulationFrame extends JFrame {
-	public static String days[] = {"Monday", "Tuesday", "Wednesday",
-		"Thursday", "Friday", "Saturday", "Sunday"};
 	private SimulationAgent myAgent;
 	private HashMap<String, Room> rooms = new HashMap<String, Room>();
 	private HashMap<String, ImageIcon> cachedIcons = new HashMap<String, ImageIcon>();
@@ -247,7 +245,7 @@ public class SimulationFrame extends JFrame {
 			setDay(false);
 		}
 		time.setText(hours + ":" + String.format("%02d", minutes));
-		this.day.setText(days[currentDay]);
+		this.day.setText(Constants.dayOfWeek[currentDay]);
 	}
 
 	public void addTime(int days, int hours, int minutes) {
