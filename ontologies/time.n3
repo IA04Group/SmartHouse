@@ -1,0 +1,96 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://utc.fr/smarthouse#>.
+
+sh:Person
+	a owl:Class;
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:onProperty sh:name;
+		  owl:cardinality 1
+		].
+
+sh:owner
+	a owl:ObjectProperty;
+	rdfs:domain sh:Event;
+	rdfs:range sh:Person.
+
+sh:Event
+	a owl:Class;
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:onProperty sh:starts;
+		  owl:cardinality 1
+		];
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:onProperty sh:ends;
+		  owl:cardinality 1
+		];
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:onProperty sh:summary;
+		  owl:cardinality 1
+		];
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:onProperty sh:owner
+		].
+
+sh:starts
+	a owl:ObjectProperty;
+	rdfs:domain sh:Event;
+	rdfs:range sh:Datetime.
+
+sh:ends
+	a owl:ObjectProperty;
+	rdfs:domain sh:Event;
+	rdfs:range sh:Datetime.
+
+sh:summary
+	a owl:DatatypeProperty;
+	rdfs:domain sh:Event;
+	rdfs:range rdfs:Literal.
+
+sh:Datetime
+	a owl:Class ;
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:maxCardinality 1;
+		  owl:onProperty sh:minute
+		];
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:maxCardinality 1;
+		  owl:onProperty sh:hour
+		];
+	rdfs:subClassOf
+		[ a owl:Restriction;
+		  owl:maxCardinality 1;
+		  owl:onProperty sh:day
+		].
+
+sh:minute
+	a owl:DatatypeProperty;
+	rdfs:domain sh:Datetime;
+	rdfs:range xsd:nonNegativeInteger.
+
+sh:hour
+	a owl:DatatypeProperty;
+	rdfs:domain sh:Datetime;
+	rdfs:range xsd:nonNegativeInteger.
+
+sh:day
+	a owl:DatatypeProperty;
+	rdfs:domain sh:Datetime;
+	owl:oneOf (
+		"Monday"@en
+		"Tuesday"@en
+		"Wednesday"@en
+		"Thursday"@en
+		"Friday"@en
+		"Saturday"@en
+		"Sunday"@en
+	).

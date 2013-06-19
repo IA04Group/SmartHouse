@@ -1,0 +1,161 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix sh:   <http://utc.fr/smarthouse#>.
+
+sh:akim
+	a sh:Person;
+	sh:name "Akim".
+
+sh:tplo22
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TP LO22";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 8;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 10;
+		  sh:minute 15
+		].
+
+sh:courssc11
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours SC11";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 13;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 14;
+		  sh:minute 15
+		].
+
+sh:tdsc11
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD SC11";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 14;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 16;
+		  sh:minute 15
+		].
+
+sh:tdsr03
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD SR03";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 16;
+		  sh:minute 30
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 19;
+		  sh:minute 30
+		].
+
+sh:coursia04
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours IA04";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 8;
+		  sh:minute 0
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 10;
+		  sh:minute 0
+		].
+
+sh:courshe01
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours HE01";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 10;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 11;
+		  sh:minute 15
+		].
+
+sh:tdhe01
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD HE01";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 11;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 13;
+		  sh:minute 15
+		].
+
+sh:courssy26
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours SY26";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 14;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 16;
+		  sh:minute 15
+		].
+
+sh:tdsy26
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD SY26";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 16;
+		  sh:minute 30
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Tuesday";
+		  sh:hour 18;
+		  sh:minute 30
+		].
