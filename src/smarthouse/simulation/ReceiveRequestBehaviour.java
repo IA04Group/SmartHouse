@@ -53,7 +53,7 @@ public class ReceiveRequestBehaviour extends CyclicBehaviour {
 			int[] datetime = ((SimulationAgent) myAgent).getWindow().getTime();
 			content.add(String.valueOf(datetime[0]));
 			content.add(String.valueOf(datetime[1]));
-			content.add(String.valueOf(datetime[1]));
+			content.add(String.valueOf(datetime[2]));
 		} else if(s.equals("isOn") || s.equals("isOpen")) {
 			int id = Integer.parseInt(json.getContent().get(1));
 			content.add(String.valueOf(id));
