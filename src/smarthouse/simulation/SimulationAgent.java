@@ -39,5 +39,9 @@ public class SimulationAgent extends GuiAgent {
 	}
 
 	protected void onGuiEvent(GuiEvent event) {
+		int day = (int) event.getParameter(0);
+		int hour = (int) event.getParameter(1);
+		int minute = (int) event.getParameter(2);
+		addBehaviour(new SendTimeBehaviour(day, hour, minute));
 	}
 }

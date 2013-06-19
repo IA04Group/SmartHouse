@@ -1,5 +1,7 @@
 package smarthouse.simulation;
 
+import jade.gui.GuiEvent;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -233,6 +235,11 @@ public class SimulationFrame extends JFrame {
 		currentDay = day;
 		currentTime[0] = hours;
 		currentTime[1] = minutes;
+		GuiEvent event = new GuiEvent(this, Constants.GUI_EVENT_TIME);
+		event.addParameter(day);
+		event.addParameter(hours);
+		event.addParameter(minutes);
+		myAgent.postGuiEvent(event);
 		if (hours >= 8 && hours < 22) {
 			setDay(true);
 		} else {
