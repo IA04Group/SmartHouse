@@ -166,7 +166,7 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
         try {
                 DFAgentDescription[] result = DFService.search(myAgent, template);
                 if (result.length > 0) {
-                        ACLMessage request = new ACLMessage(ACLMessage.INFORM);
+                        ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
                         for (DFAgentDescription receiver : result) {
                                 if (!receiver.getName().equals(myAgent.getAID())) {
                                         request.addReceiver(receiver.getName());

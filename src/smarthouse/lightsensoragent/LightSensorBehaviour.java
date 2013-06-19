@@ -138,7 +138,7 @@ class LightSensorBehaviour extends CyclicBehaviour implements SerialPortEventLis
 	
 	private ACLMessage parse(ACLMessage message){
 		// 1 pouur allumer, type de l"agent, lieu ou est la lumiere, et 0 pour l'id de la lumiere
-		MessageContent messageContent = new MessageContent(0, Constants.LIGHT_AGENT, Constants.PLACE_OUTDOOR, inputLine);
+		MessageContent messageContent = new MessageContent(0, Constants.LIGHT_AGENT, Constants.PLACE_OUTDOOR, "569"/*inputLine*/);
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
