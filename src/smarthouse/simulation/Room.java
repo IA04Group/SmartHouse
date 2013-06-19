@@ -8,13 +8,15 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import Data.Constants;
+
 public class Room extends JComponent {
 	private Color color;
 	private List<Light> lights = new ArrayList<Light>();
 	private List<Shutter> shutters = new ArrayList<Shutter>();
 	private List<Heater> heaters = new ArrayList<Heater>();
 	private List<Window> windows = new ArrayList<Window>();
-	private int lightlevel = 0;
+	private double lightlevel = 0;
 	private boolean dayTime = false;
 	private JLabel thermometer = null;
 	private double temp = 18;
@@ -33,7 +35,7 @@ public class Room extends JComponent {
 
 		// TODO: use background image
 		Color c = color;
-		for (int i = 0; i < 2 - lightlevel; ++i) {
+		for (int i = 0; i < Constants.MAX_LIGHT_LEVEL - lightlevel; ++i) {
 			c = c.darker();
 		}
 		g.setColor(c);
@@ -52,18 +54,18 @@ public class Room extends JComponent {
 		lightlevel = 0;
 		for (Light l : lights) {
 			if (l.isOn()) {
-				lightlevel += 1;
+				lightlevel += Constants.LIGHT_POWER;
 			}
 		}
 		if (dayTime) {
 			for (Shutter s : shutters) {
 				if (s.isOpen()) {
-					lightlevel += 1;
+					lightlevel += Constants.DAY_LIGHT_POWER;
 				}
 			}
 		}
-		if (lightlevel > 2) {
-			lightlevel = 2;
+		if (lightlevel > Constants.MAX_LIGHT_LEVEL) {
+			lightlevel = Constants.MAX_LIGHT_LEVEL;
 		}
 	}
 
@@ -71,17 +73,17 @@ public class Room extends JComponent {
 		tempPerMin = 0;
 		for (Heater h : heaters) {
 			if (h.isOn()) {
-				tempPerMin += 0.1;
+				tempPerMin += Constants.HEATER_POWER;
 			}
 		}
 		for (Window w : windows) {
 			if (w.isOpen()) {
 				double deltaT = outTemp - temp;
-				tempPerMin +=  Math.abs(deltaT) * deltaT * 0.02;
+				tempPerMin +=  Math.abs(deltaT) * deltaT * Constants.TEMPERATURE_TRANSFER_RATE;
 			}
 		}
-		if (temp > 37.5 && tempPerMin > 0) {
-			tempPerMin -= Math.pow(temp - 37.5, 2) * 0.01;
+		if (temp > Constants.TEMPRATE_THRESHOLD && tempPerMin > 0) {
+			tempPerMin -= Math.pow(temp - Constants.TEMPRATE_THRESHOLD, 2) * Constants.DISMINUSHING_TEMPRATE;
 		}
 	}
 
@@ -97,9 +99,9 @@ public class Room extends JComponent {
 		if (day != dayTime) {
 			dayTime = day;
 			if (dayTime) {
-				outTemp = 25;
+				outTemp = Constants.DAY_OUTDOOR_TEMPERATURE;
 			} else {
-				outTemp = 10;
+				outTemp = Constants.NIGHT_OUTDOOR_TEMPERATURE;
 			}
 			recalculateLightLevel();
 			recalculateTempPerMin();
