@@ -47,7 +47,7 @@ public class Room extends JComponent {
 		}
 	}
 
-	public void recalculateLightLevel() {
+	public synchronized void recalculateLightLevel() {
 		lightlevel = 0;
 		for (Light l : lights) {
 			if (l.isOn()) {
@@ -66,7 +66,7 @@ public class Room extends JComponent {
 		}
 	}
 
-	public void recalculateTempPerMin() {
+	public synchronized void recalculateTempPerMin() {
 		tempPerMin = 0;
 		for (Heater h : heaters) {
 			if (h.isOn()) {
@@ -118,7 +118,7 @@ public class Room extends JComponent {
 		recalculateLightLevel();
 	}
 
-	public void setLight(int id, boolean on) {
+	public synchronized void setLight(int id, boolean on) {
 		if (lights.size() < id) {
 			System.out.println("Light " + id + " not found");
 			return;
@@ -147,7 +147,7 @@ public class Room extends JComponent {
 		recalculateLightLevel();
 	}
 
-	public void setShutter(int id, boolean open) {
+	public synchronized void setShutter(int id, boolean open) {
 		if (shutters.size() < id) {
 			System.out.println("Shutter " + id + " not found");
 			return;
@@ -176,7 +176,7 @@ public class Room extends JComponent {
 		recalculateTempPerMin();
 	}
 
-	public void setHeater(int id, boolean on) {
+	public synchronized void setHeater(int id, boolean on) {
 		if (heaters.size() < id) {
 			System.out.println("Heater " + id + " not found");
 			return;
@@ -205,7 +205,7 @@ public class Room extends JComponent {
 		recalculateTempPerMin();
 	}
 
-	public void setWindow(int id, boolean open) {
+	public synchronized void setWindow(int id, boolean open) {
 		if (windows.size() < id) {
 			System.out.println("Window " + id + " not found");
 			return;

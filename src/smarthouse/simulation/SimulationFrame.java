@@ -213,7 +213,7 @@ public class SimulationFrame extends JFrame {
 		return new int[]{currentDay, currentTime[0], currentTime[1]};
 	}
 
-	public void setTime(int day, int hours, int minutes) {
+	public synchronized void setTime(int day, int hours, int minutes) {
 		// TODO: notify agents
 		currentDay = day;
 		currentTime[0] = hours;
