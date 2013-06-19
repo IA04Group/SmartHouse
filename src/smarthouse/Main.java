@@ -77,9 +77,9 @@ public class Main {
 		 * END NICO's stuff
 		 */
 		
-		//AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
+		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		// Fire up the agent
-		//simulation.start();
+		simulation.start();
 		
 		/*
 
