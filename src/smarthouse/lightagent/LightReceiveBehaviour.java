@@ -1,8 +1,6 @@
 package smarthouse.lightagent;
 
 import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
-
 import Data.Constants;
 import Data.MessageContent;
 

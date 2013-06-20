@@ -8,6 +8,12 @@ public class LightData {
 	private int position;
 	private AID lightAgentID;
 	
+	public LightData(AID id) {
+		setLightAgentID(id);
+		position = -1;
+		place = "";
+	}
+	
 	public LightData(AID id, String p, int pos) {
 		setLightAgentID(id);
 		setPlace(p);

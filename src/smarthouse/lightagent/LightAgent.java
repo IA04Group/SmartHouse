@@ -1,8 +1,8 @@
 package smarthouse.lightagent;
 
 import Data.Constants;
+import Data.LightData;
 import Data.MessageContent;
-import smarthouse.autoswitchagent.AutoSwitchSubscribeBehaviour;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
@@ -15,18 +15,16 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class LightAgent extends Agent {
 	
-	private int position = -1; // registered number in autoswitch
 	private boolean state = false; // false off, true on
-	private String place = "";
-
+	private LightData myData = new LightData(this.getAID());
 
 	public void setup(){
 		try {
 			String[] args = (String[]) getArguments();
-			place = args[0];
+			myData.setPlace(args[0]);
 		}
 		catch(Exception e) {
-			place = Constants.PLACE_RANDOM;
+			myData.setPlace(Constants.PLACE_RANDOM);
 		}
 		
 		SequentialBehaviour seqbhv = new SequentialBehaviour();
@@ -59,7 +57,8 @@ public class LightAgent extends Agent {
 				autoSwitch = result[0].getName();
 				message.addReceiver(autoSwitch);
 				
-				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, this.place, "");
+				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, 
+						this.myData.getPlace(), "");
 				
 				String answer = d.toJSON();
 				System.out.println("LIGHT on send : " + answer);
@@ -82,39 +81,22 @@ public class LightAgent extends Agent {
 	}
 
 	public int getPosition() {
-		return position;
+		return this.myData.getPosition();
 	}
 
 	public void setPosition(int position) {
-		this.position = position;
+		this.myData.setPosition(position);
 	}
 
 	public String getPlace() {
-		return place;
+		return myData.getPlace();
 	}
 
 	public void setPlace(String place) {
-		this.place = place;
+		this.myData.setPlace(place);
 	}
 	
 	public boolean getLightState() {
 		return this.state;
 	}
-	/*
-	public AID getAIDFromString(String sender) {
-		AID id = null;
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			id = objectMapper.readValue(sender, AID.class);
-		} catch (JsonParseException e1) {
-			e1.printStackTrace();
-		} catch (JsonMappingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		return id;
-	}*/
-
 }
