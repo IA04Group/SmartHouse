@@ -38,7 +38,14 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 		String action = json.getContent().get(0);
 		if (action.equals(Constants.ACTION_LOG_APPEND)) {
 			String txt = json.getContent().get(1);
-			if (!mess.contains(txt)) {
+			boolean isIn = false ;
+			for (String thing : mess) {
+				if (thing.equals(txt)) {
+					isIn = true;
+					break;
+				}
+			}
+			if (isIn) {
 				((SimulationAgent) myAgent).getWindow().appendLog(txt);
 			}
 		} else {
