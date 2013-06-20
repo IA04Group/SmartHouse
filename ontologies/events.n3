@@ -159,3 +159,164 @@ sh:tdsy26
 		  sh:hour 18;
 		  sh:minute 30
 		].
+
+sh:tdnf11
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD NF11";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Wednesday";
+		  sh:hour 8;
+		  sh:minute 0
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Wednesday";
+		  sh:hour 10;
+		  sh:minute 0
+		].
+
+sh:courssr03
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours SR03";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Wednesday";
+		  sh:hour 14;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Wednesday";
+		  sh:hour 16;
+		  sh:minute 15
+		].
+
+sh:tdlo22
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD LO22";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 10;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 12;
+		  sh:minute 15
+		].
+
+sh:tdsy26
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD SY26";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 14;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 14;
+		  sh:minute 15
+		].
+
+sh:tdia04
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TD IA04";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 16;
+		  sh:minute 30
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Thursday";
+		  sh:hour 19;
+		  sh:minute 30
+		].
+
+sh:coursnf11
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours NF11";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 8;
+		  sh:minute 0
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 10;
+		  sh:minute 0
+		].
+
+sh:courslo22
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Cours LO22";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 14;
+		  sh:minute 15
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 16;
+		  sh:minute 15
+		].
+
+sh:tpnf11
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "TP NF11";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 16;
+		  sh:minute 30
+		];
+	sh:ends
+		[ a sh:Datetime;
+		  sh:day "Friday";
+		  sh:hour 19;
+		  sh:minute 30
+		].
+
+sh:alarmMon
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Wake Up";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 7;
+		  sh:minute 15;
+		];
+	sh:action "Alarm".
+
+
+sh:coffeeMon
+	a sh:Event;
+	sh:owner sh:akim;
+	sh:summary "Coffee";
+	sh:starts
+		[ a sh:Datetime;
+		  sh:day "Monday";
+		  sh:hour 7;
+		  sh:minute 45;
+		];
+	sh:action "Coffee".

@@ -36,8 +36,18 @@ sh:Event
 		];
 	rdfs:subClassOf
 		[ a owl:Restriction;
-		  owl:onProperty sh:owner
+		  owl:onProperty sh:owner;
+		  owl:minCardinality 1
 		].
+
+sh:action
+	a owl:DatatypeProperty;
+	rdfs:domain sh:Event;
+	owl:oneOf (
+		"Coffee"@en
+		"Light"@en
+		"Alarm"@en
+	).
 
 sh:starts
 	a owl:ObjectProperty;
