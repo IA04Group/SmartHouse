@@ -60,7 +60,7 @@ public class ShutterBehaviour extends CyclicBehaviour{
 		st.setPerformative(ACLMessage.INFORM);
 		st.setContent(getMsgContent().toJSON());
 		
-		System.out.println(myAgent.getLocalName() + ": reply to " + msg.getSender().getLocalName() + "\n\t with: " + st.getContent());
+		//System.out.println(myAgent.getLocalName() + ": reply to " + msg.getSender().getLocalName() + "\n\t with: " + st.getContent());
 		
 		myAgent.send(st);
 	}

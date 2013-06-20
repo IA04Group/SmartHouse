@@ -53,7 +53,7 @@ public class WindowBehaviour extends CyclicBehaviour{
 	
 	void changeState(ACLMessage msg){
 		MessageContent ct = new MessageContent(msg);	
-		System.out.println("\n" + myAgent.getLocalName() + ": state: " + ((WindowAgent)myAgent).state + " => " + ct.getValue());
+		//System.out.println("\n" + myAgent.getLocalName() + ": state: " + ((WindowAgent)myAgent).state + " => " + ct.getValue());
 		((WindowAgent)myAgent).state = (ct.getValue() != 0);
 		
 		//Envoi un message de changement d'�tat � l'agent GUI
@@ -70,7 +70,7 @@ public class WindowBehaviour extends CyclicBehaviour{
 		st.setPerformative(ACLMessage.INFORM);
 		st.setContent(getMsgContent().toJSON());
 		
-		System.out.println(myAgent.getLocalName() + ": reply to " + msg.getSender().getLocalName() + "\n\t with: " + st.getContent());
+		//System.out.println(myAgent.getLocalName() + ": reply to " + msg.getSender().getLocalName() + "\n\t with: " + st.getContent());
 		
 		myAgent.send(st);
 	}

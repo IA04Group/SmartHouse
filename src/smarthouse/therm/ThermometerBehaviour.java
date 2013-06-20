@@ -87,8 +87,8 @@ public class ThermometerBehaviour extends TickerBehaviour{
 		if((--nb_el) == 0){
 			//g�n�ration des ordres et envoie
 			
-			System.out.println("\nTemp init: " + temp + "°\nSeuil: " + threshold + "°");
-			System.out.println("\nStatus:\n\tnb_win_o: " + nb_win_oa.size() + "\n\tnb_win_c: " + nb_win_ca.size() + "\n\tnb_rad_on: " + nb_rad_ona.size() + "\n\tnb_rad_off: " + nb_rad_offa.size());
+			//System.out.println("\nTemp init: " + temp + "°\nSeuil: " + threshold + "°");
+			//System.out.println("\nStatus:\n\tnb_win_o: " + nb_win_oa.size() + "\n\tnb_win_c: " + nb_win_ca.size() + "\n\tnb_rad_on: " + nb_rad_ona.size() + "\n\tnb_rad_off: " + nb_rad_offa.size());
 			
 			tempControl(temp, threshold);
 			
@@ -197,7 +197,7 @@ public class ThermometerBehaviour extends TickerBehaviour{
 		
 		for(int i = 0; i < receivers.size(); i++){
 			message.addReceiver((AID)receivers.get(i));
-			System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)receivers.get(i)).getLocalName());
+			//System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)receivers.get(i)).getLocalName());
 		}
 		
 		MessageContent msgCt = new MessageContent(Constants.THERMOMETER, ((ThermometerAgent)myAgent).place);
@@ -215,7 +215,7 @@ public class ThermometerBehaviour extends TickerBehaviour{
 		nb_el += receivers.size(); 
 		for(int i = 0; i < receivers.size(); i++){
 			message.addReceiver((AID)receivers.get(i));
-			System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)receivers.get(i)).getLocalName());
+			//System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)receivers.get(i)).getLocalName());
 		}
 		
 		MessageContent msgCt = new MessageContent(Constants.THERMOMETER, ((ThermometerAgent)myAgent).place);
@@ -232,13 +232,13 @@ public class ThermometerBehaviour extends TickerBehaviour{
 		List rcv = getReceiver(Constants.SIMULATION, Constants.SIMULATION_AGENT);
 		
 		if(rcv.size() == 0){
-			System.out.println(myAgent.getLocalName() + ": Can't find " + Constants.SIMULATION_AGENT);
+			//System.out.println(myAgent.getLocalName() + ": Can't find " + Constants.SIMULATION_AGENT);
 			return;
 		}
 			
 		message.addReceiver((AID)rcv.get(0));
 		nb_el ++;
-		System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)rcv.get(0)).getLocalName());
+		//System.out.println(myAgent.getLocalName() + ": ask to " + ((AID)rcv.get(0)).getLocalName());
 		MessageContent msgCt = new MessageContent(Constants.THERMOMETER, ((ThermometerAgent)myAgent).place, "temperature");
 		
 		message.setContent(msgCt.toJSON());

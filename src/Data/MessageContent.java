@@ -77,7 +77,7 @@ public class MessageContent {
 	}
 	
 	public MessageContent(ACLMessage msg){
-		System.out.println("ON Y ESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+		//System.out.println("ON Y ESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode jrootNode = null;
 		

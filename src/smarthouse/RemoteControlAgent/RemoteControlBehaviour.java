@@ -38,7 +38,7 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
 			"/dev/ttyUSB0", // Linux
-			"COM5", // Windows
+			"COM6", // Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
