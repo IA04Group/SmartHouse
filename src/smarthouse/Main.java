@@ -56,7 +56,7 @@ public class Main {
 		 * 
 		 */
 		// agents autoswitch and lights
-		/*AgentController autoSwitchAgent = cc.createNewAgent("autoSwitchAgent",
+		AgentController autoSwitchAgent = cc.createNewAgent(Constants.AUTO_SWITCH_AGENT,
 				"smarthouse.autoswitchagent.AutoSwitchAgent", null);
 		// Fire up the agent
 		autoSwitchAgent.start();
@@ -64,22 +64,28 @@ public class Main {
 		String[] param = new String[1];
 		
 		param[0] = Constants.PLACE_BEDROOM;
-		AgentController light1Agent = cc.createNewAgent("lightAgent1",
+		AgentController light1Agent = cc.createNewAgent("light_bedroom1",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light1Agent.start();
 		
 		param[0] = Constants.PLACE_BEDROOM;
-		AgentController light2Agent = cc.createNewAgent("lightAgent2",
+		AgentController light2Agent = cc.createNewAgent("light_bedroom2",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light2Agent.start();
 		
 		param[0] = Constants.PLACE_LIVINGROOM;
-		AgentController light3Agent = cc.createNewAgent("lightAgent3",
+		AgentController light3Agent = cc.createNewAgent("light_livingroom1",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
-		light3Agent.start();*/
+		light3Agent.start();
+		
+		param[0] = Constants.PLACE_KITCHEN;
+		AgentController light4Agent = cc.createNewAgent("light_kitchen1",
+				"smarthouse.lightagent.LightAgent", param);
+		// Fire up the agent
+		light4Agent.start();
 		
 		/*
 		 * 
@@ -154,7 +160,7 @@ public class Main {
 		Runtime rt = Runtime.instance();
 
 		Profile p = new ProfileImpl("localhost", -1, null, false);
-		ContainerController cc = rt.createAgentContainer(p);
+		/*ContainerController cc =*/ rt.createAgentContainer(p);
 		//AgentController queryAgent = cc.createNewAgent("QueryAgent2","td5.agent.QueryAgent", null);
 		// Fire up the agent
 		//queryAgent.start();
