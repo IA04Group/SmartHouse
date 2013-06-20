@@ -53,7 +53,6 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 		}*/
 		answer = new ACLMessage(ACLMessage.INFORM); //uncomment
 		ArrayList<String> c = new ArrayList<String>();
-		c.add(Constants.LIGHT);
 		c.add("" + ((LightAgent)myAgent).getPosition());
 		MessageContent answerContent = new MessageContent(content.getValue(), 
 							Constants.LIGHT_AGENT, ((LightAgent)myAgent).getPlace(), c
