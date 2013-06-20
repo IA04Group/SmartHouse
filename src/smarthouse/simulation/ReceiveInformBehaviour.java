@@ -45,8 +45,9 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 					break;
 				}
 			}
-			if (isIn) {
+			if (!isIn) {
 				((SimulationAgent) myAgent).getWindow().appendLog(txt);
+				mess.add(txt);
 			}
 		} else {
 			Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
