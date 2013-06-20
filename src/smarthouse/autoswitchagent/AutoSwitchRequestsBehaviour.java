@@ -69,7 +69,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			AID sender = message.getSender();
 			
 			// TODO HOW do I know the light ?!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			int lightN = (int) d.getValue();
+			int lightN = Integer.parseInt(d.getContent().get(0));
 			if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
 				if(ld != null) {

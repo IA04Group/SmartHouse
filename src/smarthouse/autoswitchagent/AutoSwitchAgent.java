@@ -66,6 +66,7 @@ public class AutoSwitchAgent extends Agent {
 		int pos = 0;
 		
 		if(place.equals(Constants.PLACE_BEDROOM)) {
+			System.out.println("NEW BEDROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
 			pos = this.findLightNumber(this.bedroomLights);
 			this.bedroomLights.add(new LightData(sender, place, pos));
 		}

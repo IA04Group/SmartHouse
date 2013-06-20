@@ -139,26 +139,26 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
 		System.out.println(inputLine + "test");
 		MessageContent messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM);
 		if(inputLine.equals(Constants.BUTTON_1_OFF)){
-			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM);
+			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_1_ON)){
-			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM);
+			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_2_OFF)){
-			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_KITCHEN);
+			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_KITCHEN, "0");
 		}else if(inputLine.equals(Constants.BUTTON_2_ON)){
-			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_KITCHEN);
+			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_KITCHEN, "0");
 		}else if(inputLine.equals(Constants.BUTTON_3_OFF)){
-			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_LIVINGROOM);
+			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_LIVINGROOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_3_ON)){
-			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM);
+			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_LIVINGROOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_4_OFF)){
-			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM);
+			messageContent = new MessageContent(0, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_4_ON)){
-			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM);
+			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM, "0");
 			System.out.println("oh yeah");
-		}else if(inputLine.equals(Constants.BUTTON_5_ON)){
-			messageContent = new MessageContent(1, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
+		//}else if(inputLine.equals(Constants.BUTTON_5_ON)){
+			/*messageContent = new MessageContent(1, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
 		}else if(inputLine.equals(Constants.BUTTON_5_OFF)){
-			messageContent = new MessageContent(0, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
+			messageContent = new MessageContent(0, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");*/
 		}
 				
 		String json = messageContent.toJSON();
