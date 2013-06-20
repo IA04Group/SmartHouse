@@ -68,19 +68,19 @@ public class Main {
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light1Agent.start();
-		
+		param = new String[1];
 		param[0] = Constants.PLACE_BEDROOM;
 		AgentController light2Agent = cc.createNewAgent("light_bedroom2",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light2Agent.start();
-		
+		param = new String[1];
 		param[0] = Constants.PLACE_LIVINGROOM;
 		AgentController light3Agent = cc.createNewAgent("light_livingroom1",
 				"smarthouse.lightagent.LightAgent", param);
 		// Fire up the agent
 		light3Agent.start();
-		
+		param = new String[1];
 		param[0] = Constants.PLACE_KITCHEN;
 		AgentController light4Agent = cc.createNewAgent("light_kitchen1",
 				"smarthouse.lightagent.LightAgent", param);

@@ -56,7 +56,7 @@ public class LightAgent extends Agent {
 			if(result.length > 0) {
 				autoSwitch = result[0].getName();
 				message.addReceiver(autoSwitch);
-				
+				System.out.println("LIGHT GET PLACE : " + this.myData.getPlace());
 				MessageContent d = new MessageContent(0, Constants.LIGHT_AGENT, 
 						this.myData.getPlace(), "");
 				

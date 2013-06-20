@@ -55,7 +55,7 @@ public class LightReceiveBehaviour extends CyclicBehaviour{
 		ArrayList<String> c = new ArrayList<String>();
 		c.add("" + ((LightAgent)myAgent).getPosition());
 		MessageContent answerContent = new MessageContent(content.getValue(), 
-							Constants.LIGHT_AGENT, ((LightAgent)myAgent).getPlace(), c
+							Constants.LIGHT, ((LightAgent)myAgent).getPlace(), c
 							);
 		
 		String res = answerContent.toJSON();
