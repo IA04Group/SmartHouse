@@ -78,8 +78,12 @@ public class Main {
 		 */
 		
 		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
-		// Fire up the agens
+		// Fire up the agent
 		simulation.start();
+
+		AgentController planning = cc.createNewAgent("planning","smarthouse.planning.PlanningAgent", null);
+		// Fire up the agent
+		planning.start();
 		
 		AgentController therm = cc.createNewAgent(Constants.THERMOMETER_AGENT,"smarthouse.therm.ThermometerAgent", new Object[]{Constants.PLACE_LIVINGROOM});
 		// Fire up the agent
@@ -100,7 +104,14 @@ public class Main {
 		rad = cc.createNewAgent("Heater 2","smarthouse.heater.HeaterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
 		// Fire up the agent
 		rad.start();
+
+		AgentController vol = cc.createNewAgent("Shutter 1","smarthouse.shutter.ShutterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
+		// Fire up the agent
+		vol.start();
 		
+		vol = cc.createNewAgent("Shutter 2","smarthouse.shutter.ShutterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
+		// Fire up the agent
+		vol.start();
 		/*
 
 		// Pour la creation du second agent sur un conteneur non principal

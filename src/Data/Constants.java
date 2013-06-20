@@ -49,6 +49,7 @@ public class Constants {
 	public static final String PLACE_LIVINGROOM = "livingroom";
 	public static final String PLACE_KITCHEN = "kitchen";
 	public static final String PLACE_RANDOM = "random";
+	public static final String[] PLACES = new String[] {PLACE_BEDROOM, PLACE_LIVINGROOM, PLACE_KITCHEN};
 
 	  
 	/*
@@ -85,6 +86,9 @@ public class Constants {
 	 * Gui Event
 	 */
 	public static final int GUI_EVENT_TIME = 0;
+	public static final String TO_DAY = "transition_to_day";
+	public static final String TO_NIGHT = "transition_to_night";
+	public static final String NO_TRANSITION = "no_transition";
 
 
 	/*

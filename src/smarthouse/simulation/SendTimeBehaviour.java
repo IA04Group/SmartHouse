@@ -10,17 +10,19 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
 public class SendTimeBehaviour extends OneShotBehaviour {
-	private String day, hour, min;
-	public SendTimeBehaviour(int day, int hour, int min) {
+	private String day, hour, min, transition;
+	public SendTimeBehaviour(int day, int hour, int min, String transition) {
 		super();
 		this.day = String.valueOf(day);
 		this.hour = String.valueOf(hour);
 		this.min = String.valueOf(min);
+		this.transition = transition;
 	}
 
 	public void action() {
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-		MessageContent json = new MessageContent(Constants.SIMULATION_AGENT, Constants.PLACE_OUTDOOR, "time", day, hour, min);
+		MessageContent json = new MessageContent(Constants.SIMULATION_AGENT,
+				Constants.PLACE_OUTDOOR, "time", day, hour, min, transition);
 		msg.setContent(json.toJSON());
 		
 		DFAgentDescription template = new DFAgentDescription();

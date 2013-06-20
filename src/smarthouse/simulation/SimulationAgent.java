@@ -42,6 +42,7 @@ public class SimulationAgent extends GuiAgent {
 		Integer day = (Integer) event.getParameter(0);
 		Integer hour = (Integer) event.getParameter(1);
 		Integer minute = (Integer) event.getParameter(2);
-		addBehaviour(new SendTimeBehaviour(day, hour, minute));
+		String transition = (String) event.getParameter(3);
+		addBehaviour(new SendTimeBehaviour(day, hour, minute, transition));
 	}
 }

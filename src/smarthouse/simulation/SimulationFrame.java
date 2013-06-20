@@ -325,12 +325,18 @@ public class SimulationFrame extends JFrame {
 		event.addParameter(day);
 		event.addParameter(hours);
 		event.addParameter(minutes);
-		myAgent.postGuiEvent(event);
+		boolean old = dayTime;
 		if (hours >= 8 && hours < 22) {
 			setDay(true);
 		} else {
 			setDay(false);
 		}
+		if (dayTime != old) {
+			event.addParameter(dayTime ? Constants.TO_DAY : Constants.TO_NIGHT);
+		} else {
+			event.addParameter(Constants.NO_TRANSITION);
+		}
+		myAgent.postGuiEvent(event);
 		time.setText(hours + ":" + String.format("%02d", minutes));
 		this.day.setText(Constants.dayOfWeek[currentDay]);
 	}

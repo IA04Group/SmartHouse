@@ -41,10 +41,11 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 		if (type == null) {
 			return;
 		}
-		if (type.equals("time") && json.getContent().size() >= 4) {
+		if (type.equals("time") && json.getContent().size() >= 5) {
 			int day =Integer.parseInt(json.getContent().get(1));
 			int hour = Integer.parseInt(json.getContent().get(2));
 			int min = Integer.parseInt(json.getContent().get(3));
+			String transition = json.getContent().get(4);
 			List<HashMap<String, RDFNode>> starting = ((PlanningAgent) myAgent).runExecQuery(
 "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
 "PREFIX owl:  <http://www.w3.org/2002/07/owl#>\n" +
@@ -102,6 +103,36 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 				sendEventLog("end",
 						map.get("event").asLiteral().getString(),
 						map.get("name").asLiteral().getString());
+			}
+			doDayTransitionAction(transition);
+		}
+	}
+
+	private void doDayTransitionAction(String transition) {
+		if (transition.equals(Constants.TO_DAY) || transition.equals(Constants.TO_NIGHT)) {
+			for (String place : Constants.PLACES) {
+				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+				MessageContent json = new MessageContent(
+						transition.equals(Constants.TO_DAY) ? 1 : 0,
+						Constants.PLANNING_AGENT,
+						place);
+				msg.setContent(json.toJSON());
+				DFAgentDescription template = new DFAgentDescription();
+				ServiceDescription sd = new ServiceDescription();
+				sd.setType(Constants.SHUTTER);
+				sd.setName(place);
+				template.addServices(sd);
+				try {
+					DFAgentDescription[] result = DFService.search(myAgent, template);
+					if (result.length > 0) {
+						for (DFAgentDescription receiver : result) {
+							msg.addReceiver(receiver.getName());
+						}
+						myAgent.send(msg);
+					}
+				} catch(FIPAException fe) {
+					fe.printStackTrace();
+				}
 			}
 		}
 	}

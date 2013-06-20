@@ -66,7 +66,7 @@ public class ShutterBehaviour extends CyclicBehaviour{
 	}
 	
 	MessageContent getMsgContent(){
-		return new MessageContent((((ShutterAgent)myAgent).state) ? 1.0 : 0.0, "Blind", ((ShutterAgent)myAgent).place, "" + ((ShutterAgent)myAgent).id);
+		return new MessageContent((((ShutterAgent)myAgent).state) ? 1.0 : 0.0, Constants.SHUTTER, ((ShutterAgent)myAgent).place, "" + ((ShutterAgent)myAgent).id);
 	}
 	
 	public List getReceiver(String type, String name) {
