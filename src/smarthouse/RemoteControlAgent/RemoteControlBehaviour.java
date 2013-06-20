@@ -155,22 +155,30 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
 		}else if(inputLine.equals(Constants.BUTTON_4_ON)){
 			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_RANDOM, "0");
 			System.out.println("oh yeah");
-		//}else if(inputLine.equals(Constants.BUTTON_5_ON)){
-			/*messageContent = new MessageContent(1, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
+		}else if(inputLine.equals(Constants.BUTTON_5_ON)){
+			messageContent = new MessageContent(1, Constants.SHUTTER, Constants.PLACE_LIVINGROOM);
 		}else if(inputLine.equals(Constants.BUTTON_5_OFF)){
-			messageContent = new MessageContent(0, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");*/
+			messageContent = new MessageContent(0, Constants.SHUTTER, Constants.PLACE_LIVINGROOM);
 		}
 				
 		String json = messageContent.toJSON();
 		DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
-        sd.setType(Constants.AUTO_SWITCH);
-        sd.setName(Constants.AUTO_SWITCH_AGENT);
+        if (inputLine.equals(Constants.BUTTON_5_ON) || inputLine.equals(Constants.BUTTON_5_OFF)) {
+		sd.setType(Constants.SHUTTER);
+		sd.setName(Constants.PLACE_LIVINGROOM);
+        } else {
+		sd.setType(Constants.AUTO_SWITCH);
+		sd.setName(Constants.AUTO_SWITCH_AGENT);
+        }
         template.addServices(sd);
         try {
                 DFAgentDescription[] result = DFService.search(myAgent, template);
                 if (result.length > 0) {
                         ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+                        if (inputLine.equals(Constants.BUTTON_5_ON) || inputLine.equals(Constants.BUTTON_5_OFF)) {
+				request.setPerformative(ACLMessage.INFORM);
+                        }
                         for (DFAgentDescription receiver : result) {
                                 if (!receiver.getName().equals(myAgent.getAID())) {
                                         request.addReceiver(receiver.getName());
