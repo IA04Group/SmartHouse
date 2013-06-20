@@ -1,5 +1,7 @@
 package smarthouse.autoswitchagent;
 
+import java.util.ArrayList;
+
 import Data.Constants;
 import Data.LightData;
 import Data.MessageContent;
@@ -74,7 +76,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
-					sendBadRequest(message.getSender(), "Lumière introuvable");
+					sendBadSimRequest("Lumière introuvable");
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
@@ -83,7 +85,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
-					sendBadRequest(message.getSender(), "Lumière introuvable");
+					sendBadSimRequest("Lumière introuvable");
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
@@ -92,7 +94,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
-					sendBadRequest(message.getSender(), "Lumière introuvable");
+					sendBadSimRequest("Lumière introuvable");
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_KITCHEN)) {
@@ -101,7 +103,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
-					sendBadRequest(message.getSender(), "Lumière introuvable");
+					sendBadSimRequest("Lumière introuvable");
 				}
 			}
 			else {
@@ -110,7 +112,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
 				}
 				else {
-					sendBadRequest(message.getSender(), "Lumière introuvable");
+					sendBadSimRequest("Lumière introuvable");
 				}
 			}
 			}
@@ -123,7 +125,10 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		ACLMessage answer = new ACLMessage(ACLMessage.INFORM);
 		
 		// parsing
-		MessageContent content = new MessageContent(0, Constants.AUTO_SWITCH_AGENT, "", string);
+		ArrayList<String> al = new ArrayList<String>();
+		al.add(Constants.ACTION_LOG_APPEND);
+		al.add(string);
+		MessageContent content = new MessageContent(0, Constants.AUTO_SWITCH_AGENT, "", al);
 		
 
 		String res = content.toJSON();
@@ -191,7 +196,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 	 * if the requested light does not exist or is already in the demanded state
 	 * 
 	 */
-	public void sendBadRequest(AID sender, String message) {
+	/*public void sendBadRequest(AID sender, String message) {
 		MessageContent d = new MessageContent(0, Constants.AUTO_SWITCH, message);
 		
 		String answer = d.toJSON();
@@ -200,7 +205,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 		msg.setContent(answer);
 		msg.addReceiver(sender);
 		myAgent.send(msg);
-	}
+	}*/
 	
 
 	private boolean isDay(MessageContent content) {		
