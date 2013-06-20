@@ -5,6 +5,8 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import Data.Constants;
 import Data.MessageContent;
@@ -12,6 +14,7 @@ import Data.MessageContent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ReceiveInformBehaviour extends CyclicBehaviour {
+	public List<String> mess = new LinkedList<String>();
 	public void action() {
 		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 		ACLMessage msg = myAgent.receive(mt);
@@ -34,7 +37,10 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 
 		String action = json.getContent().get(0);
 		if (action.equals(Constants.ACTION_LOG_APPEND)) {
-			((SimulationAgent) myAgent).getWindow().appendLog(json.getContent().get(1));
+			String txt = json.getContent().get(1);
+			if (!mess.contains(txt)) {
+				((SimulationAgent) myAgent).getWindow().appendLog(txt);
+			}
 		} else {
 			Room room = ((SimulationAgent) myAgent).getWindow().getRoom(json.getPlace());
 			int id = Integer.parseInt(action);
