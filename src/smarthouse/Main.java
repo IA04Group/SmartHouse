@@ -24,6 +24,15 @@ public class Main {
 		// main container (i.e. on this host, port 1099)
 		ContainerController cc = rt.createMainContainer(p);
 
+		String place = null;
+
+		AgentController simulation = null;
+		AgentController planning = null;
+		AgentController therm = null;
+		AgentController rad = null;
+		AgentController vol = null;
+		AgentController win = null;
+
 		// Create a new agent
 		// and pass it a reference to an Object
 		// AgentController lightSensorAgent = cc.createNewAgent("lightSensorAgent","smarthouse.lightsensoragent.LightSensorAgent", null);
@@ -77,51 +86,68 @@ public class Main {
 		 * END NICO's stuff
 		 */
 		
-		AgentController simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
-		// Fire up the agent
+		/* === No Place === */
+		simulation = cc.createNewAgent("simulation","smarthouse.simulation.SimulationAgent", null);
 		simulation.start();
 
-		AgentController planning = cc.createNewAgent("planning","smarthouse.planning.PlanningAgent", null);
-		// Fire up the agent
+		planning = cc.createNewAgent("planning","smarthouse.planning.PlanningAgent", null);
 		planning.start();
 		
-		AgentController therm = cc.createNewAgent(Constants.THERMOMETER_AGENT,"smarthouse.therm.ThermometerAgent", new Object[]{Constants.PLACE_LIVINGROOM});
-		// Fire up the agent
+		/* === Living Room === */
+		place = Constants.PLACE_LIVINGROOM;
+		therm = cc.createNewAgent(Constants.THERMOMETER_AGENT + " " + place,"smarthouse.therm.ThermometerAgent", new Object[]{Constants.PLACE_LIVINGROOM});
 		therm.start();
 		
-		AgentController win = cc.createNewAgent("Window 1","smarthouse.window.WindowAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
-		// Fire up the agent
+		win = cc.createNewAgent("Window 1 " + place,"smarthouse.window.WindowAgent", new Object[]{place, 0});
+		win.start();
+		win = cc.createNewAgent("Window 2 " + place,"smarthouse.window.WindowAgent", new Object[]{place, 1});
 		win.start();
 		
-		win = cc.createNewAgent("Window 2","smarthouse.window.WindowAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
-		// Fire up the agent
-		win.start();
-		
-		AgentController rad = cc.createNewAgent("Heater 1","smarthouse.heater.HeaterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
-		// Fire up the agent
+		rad = cc.createNewAgent("Heater 1 " + place,"smarthouse.heater.HeaterAgent", new Object[]{place, 0});
 		rad.start();
-		
-		rad = cc.createNewAgent("Heater 2","smarthouse.heater.HeaterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
-		// Fire up the agent
+		rad = cc.createNewAgent("Heater 2 " + place,"smarthouse.heater.HeaterAgent", new Object[]{place, 1});
 		rad.start();
 
-		AgentController vol = cc.createNewAgent("Shutter 1","smarthouse.shutter.ShutterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 0});
-		// Fire up the agent
+		vol = cc.createNewAgent("Shutter 1 " + place,"smarthouse.shutter.ShutterAgent", new Object[]{place, 0});
+		vol.start();
+		vol = cc.createNewAgent("Shutter 2 " + place,"smarthouse.shutter.ShutterAgent", new Object[]{place, 1});
 		vol.start();
 		
-		vol = cc.createNewAgent("Shutter 2","smarthouse.shutter.ShutterAgent", new Object[]{Constants.PLACE_LIVINGROOM, 1});
-		// Fire up the agent
+		/* === Kitchen === */
+		place = Constants.PLACE_KITCHEN;
+		therm = cc.createNewAgent(Constants.THERMOMETER_AGENT + " " + place,"smarthouse.therm.ThermometerAgent", new Object[]{place});
+		therm.start();
+
+		win = cc.createNewAgent("Window 1 " + place,"smarthouse.window.WindowAgent", new Object[]{place, 0});
+		win.start();
+
+		rad = cc.createNewAgent("Heater 1 " + place,"smarthouse.heater.HeaterAgent", new Object[]{place, 0});
+		rad.start();
+
+		vol = cc.createNewAgent("Shutter 1 " + place,"smarthouse.shutter.ShutterAgent", new Object[]{place, 0});
 		vol.start();
+		
+		/* === Bedroom === */
+		place = Constants.PLACE_BEDROOM;
+		therm = cc.createNewAgent(Constants.THERMOMETER_AGENT + " " + place,"smarthouse.therm.ThermometerAgent", new Object[]{place});
+		therm.start();
+
+		win = cc.createNewAgent("Window 1 " + place,"smarthouse.window.WindowAgent", new Object[]{place, 0});
+		win.start();
+
+		rad = cc.createNewAgent("Heater 1 " + place,"smarthouse.heater.HeaterAgent", new Object[]{place, 0});
+		rad.start();
+
+		vol = cc.createNewAgent("Shutter 1 " + place,"smarthouse.shutter.ShutterAgent", new Object[]{place, 0});
+		vol.start();
+
 		/*
-
 		// Pour la creation du second agent sur un conteneur non principal
 		// utiliser cette fonction sinon de/commenter
 		// en reseau exactemment la meme chose en remplacant l'IP
 		// par le localhost de la machine distante.
 		// createNotmain();
 		*/
-
-		
 	}
 	
 	public static void createNotmain() throws StaleProxyException{
