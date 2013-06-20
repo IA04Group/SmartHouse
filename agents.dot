@@ -4,7 +4,6 @@ digraph {
     user [label="utilisateur"];
     coffee [label="machine à café"];
     dbplanning [label="bdd emploi du temps"];
-    kinect [label="Kinect"];
     arduino [label="Arduino émetteur radio"];
     lightsensor [label="détecteur de lumière"];
     window [label="fenêtre"];
@@ -14,14 +13,13 @@ digraph {
 
     /* Agents */
     node [shape=oval, style=""];
-    Aandroid [label="Agent Android"];
+    Aandroid [label="Agent Remote"];
     Aautoswitch [label="Agent autoswitch"];
     Acoffee [label="Agent café"];
     Aplanning [label="Agent emploi du temps"];
-    Akinect [label="Agent Kinect"];
     Alight [label="Agent lumière"];
     Alightsensor [label="Agent détecteur de lumière"];
-    Atemperature [label="Agent thermomètre"];
+    Atemperature [label="Agent thermostat"];
     Awindow [label="Agent fenêtre"];
     Ashutter [label="Agent volet"];
     Aheater [label="Agent chauffage"];
@@ -32,7 +30,6 @@ digraph {
     Aautoswitch -> user;
     Acoffee -> coffee;
     Aplanning -> dbplanning;
-    Akinect -> kinect;
     Alight -> arduino;
     Alightsensor -> lightsensor;
     Awindow -> window;
@@ -44,6 +41,6 @@ digraph {
     edge [arrowhead=normal, arrowtail=normal, dir=both];
     Aplanning -> {Acoffee, Aandroid, Aautoswitch}
     Aandroid -> {Aautoswitch, Acoffee};
-    Aautoswitch -> {Akinect, Alightsensor, Alight};
+    Aautoswitch -> {Alightsensor, Alight};
     Atemperature -> {Aplanning, Awindow, Ashutter, Aheater};
 }
