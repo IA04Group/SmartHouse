@@ -10,6 +10,7 @@ import jade.lang.acl.MessageTemplate;
 @SuppressWarnings("serial")
 public class AutoSwitchSubscribeBehaviour extends Behaviour {
 	private int current_lights = 0;
+	private int nbr_lights = 0;
 
 	@Override
 	public void action() {
@@ -24,7 +25,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 			current_lights = ((AutoSwitchAgent) myAgent).subscribeNewLight(message.getSender(),
 						content.getPlace());
 			System.out.println("New light ! : " + message.getSender());
-			
+			nbr_lights++;
 			MessageContent data = new MessageContent(current_lights, Constants.AUTO_SWITCH, "");
 			String answer = data.toJSON();
 
@@ -40,7 +41,7 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 
 	@Override
 	public boolean done() {
-		return Constants.NBR_MAX_LIGHTS <= current_lights;
+		return Constants.NBR_MAX_LIGHTS <= nbr_lights;
 	}
 
 }
