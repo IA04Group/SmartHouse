@@ -155,6 +155,10 @@ class RemoteControlBehaviour extends CyclicBehaviour implements SerialPortEventL
 		}else if(inputLine.equals(Constants.BUTTON_4_ON)){
 			messageContent = new MessageContent(1, Constants.REMOTE_CONTROL_AGENT, Constants.PLACE_BEDROOM);
 			System.out.println("oh yeah");
+		}else if(inputLine.equals(Constants.BUTTON_5_ON)){
+			messageContent = new MessageContent(1, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
+		}else if(inputLine.equals(Constants.BUTTON_5_OFF)){
+			messageContent = new MessageContent(0, Constants.SHUTTER, Constants.PLACE_LIVINGROOM, "0");
 		}
 				
 		String json = messageContent.toJSON();
