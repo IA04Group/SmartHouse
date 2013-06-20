@@ -58,65 +58,68 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			
 			
 			if(isDay) {
+				System.out.println("JOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUR");
 				sendBadSimRequest("Il fait deja jour");
 				//return;
-			}else{
+			}
+			else{
+				System.out.println("NUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIT");
 				
-			
-			// light processing
-			
-			LightData ld = null;
-			AID sender = message.getSender();
-			
-			// TODO HOW do I know the light ?!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			int lightN = Integer.parseInt(d.getContent().get(0));
-			if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
-				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
-				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+				// light processing
+				
+				LightData ld = null;
+				AID sender = message.getSender();
+				
+				// TODO HOW do I know the light ?!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				int lightN = Integer.parseInt(d.getContent().get(0));
+				if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
+					ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
+					if(ld != null) {
+						sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+					}
+					else {
+						sendBadSimRequest("Lumière introuvable");
+					}
+				}
+				else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
+					ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_BEDROOM, lightN);
+					if(ld != null) {
+						sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+					}
+					else {
+						sendBadSimRequest("Lumière introuvable");
+					}
+				}
+				else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
+					ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_LIVINGROOM, lightN);
+					if(ld != null) {
+						sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+					}
+					else {
+						sendBadSimRequest("Lumière introuvable");
+					}
+				}
+				else if(d.getPlace().equals(Constants.PLACE_KITCHEN)) {
+					ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_KITCHEN, lightN);
+					if(ld != null) {
+						sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+					}
+					else {
+						sendBadSimRequest("Lumière introuvable");
+					}
 				}
 				else {
-					sendBadSimRequest("Lumière introuvable");
+					ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_RANDOM, lightN);
+					if(ld != null) {
+						sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
+					}
+					else {
+						sendBadSimRequest("Lumière introuvable");
+					}
 				}
 			}
-			else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
-				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_BEDROOM, lightN);
-				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
-				}
-				else {
-					sendBadSimRequest("Lumière introuvable");
-				}
-			}
-			else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
-				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_LIVINGROOM, lightN);
-				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
-				}
-				else {
-					sendBadSimRequest("Lumière introuvable");
-				}
-			}
-			else if(d.getPlace().equals(Constants.PLACE_KITCHEN)) {
-				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_KITCHEN, lightN);
-				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
-				}
-				else {
-					sendBadSimRequest("Lumière introuvable");
-				}
-			}
-			else {
-				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_RANDOM, lightN);
-				if(ld != null) {
-					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
-				}
-				else {
-					sendBadSimRequest("Lumière introuvable");
-				}
-			}
-			}
-		}else{
+		}
+		else{
 			block();
 		}
 	}
@@ -148,7 +151,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				sender = result[0].getName();
 				answer.addReceiver(sender);
 				answer.setContent(res);
-				//myAgent.send(answer);
+				myAgent.send(answer);
 			}
 		} catch (FIPAException e) {
 			e.printStackTrace();
