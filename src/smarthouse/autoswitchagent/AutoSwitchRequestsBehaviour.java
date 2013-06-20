@@ -56,7 +56,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			}
 			
 			
-			
+			System.out.println("############################################# " + isDay);
 			if(isDay) {
 				sendBadSimRequest("Il fait deja jour");
 				//return;
@@ -148,7 +148,7 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				sender = result[0].getName();
 				answer.addReceiver(sender);
 				answer.setContent(res);
-				//myAgent.send(answer);
+				myAgent.send(answer);
 			}
 		} catch (FIPAException e) {
 			e.printStackTrace();
