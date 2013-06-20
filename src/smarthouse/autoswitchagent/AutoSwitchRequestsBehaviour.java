@@ -66,9 +66,9 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 			LightData ld = null;
 			AID sender = message.getSender();
 			
-			int lightN = 0;
+			// TODO HOW do I know the light ?!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			int lightN = (int) d.getValue();
 			if(d.getPlace().equals(Constants.PLACE_OUTDOOR)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(0);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_OUTDOOR, lightN);
 				if(ld != null) {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
@@ -78,7 +78,6 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_BEDROOM)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(1);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_BEDROOM, lightN);
 				if(ld != null) {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
@@ -88,7 +87,6 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_LIVINGROOM)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(2);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_LIVINGROOM, lightN);
 				if(ld != null) {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
@@ -98,7 +96,6 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				}
 			}
 			else if(d.getPlace().equals(Constants.PLACE_KITCHEN)) {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(3);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_KITCHEN, lightN);
 				if(ld != null) {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);
@@ -108,7 +105,6 @@ public class AutoSwitchRequestsBehaviour extends CyclicBehaviour {
 				}
 			}
 			else {
-				lightN = ((AutoSwitchAgent)myAgent).getLightsPerRoom().get(4);
 				ld = ((AutoSwitchAgent)myAgent).retrieveLight(Constants.PLACE_RANDOM, lightN);
 				if(ld != null) {
 					sendLightRequest(ld.getLightAgentID(), (int) d.getValue(), sender);

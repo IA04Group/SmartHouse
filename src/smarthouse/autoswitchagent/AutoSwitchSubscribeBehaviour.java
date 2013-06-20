@@ -24,8 +24,6 @@ public class AutoSwitchSubscribeBehaviour extends Behaviour {
 			current_lights = ((AutoSwitchAgent) myAgent).subscribeNewLight(message.getSender(),
 						content.getPlace());
 			System.out.println("New light ! : " + message.getSender());
-			System.out.println("Suite : New light ! : " + 
-							((AutoSwitchAgent) myAgent).lights.get(current_lights-1).toString());
 			
 			MessageContent data = new MessageContent(current_lights, Constants.AUTO_SWITCH, "");
 			String answer = data.toJSON();
